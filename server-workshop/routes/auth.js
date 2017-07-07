@@ -19,9 +19,14 @@ function validateSignupForm (payload) {
     errors.password = 'Password must have at least 4 characters.'
   }
 
-  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
+  if (!payload || typeof payload.firstName !== 'string' || payload.firstName.trim().length === 0) {
     isFormValid = false
-    errors.name = 'Please provide your name.'
+    errors.firstName = 'Please provide your first name.'
+  }
+
+  if (!payload || typeof payload.lastName !== 'string' || payload.lastName.trim().length === 0) {
+    isFormValid = false
+    errors.lastName = 'Please provide your last name'
   }
 
   if (!isFormValid) {
@@ -110,7 +115,7 @@ router.post('/login', (req, res, next) => {
         message: 'Could not process the form.'
       })
     }
-
+    console.log('debug')
     return res.json({
       success: true,
       message: 'You have successfully logged in!',

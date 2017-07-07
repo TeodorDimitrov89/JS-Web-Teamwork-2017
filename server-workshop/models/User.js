@@ -4,17 +4,11 @@ const SCHEMA = mongoose.Schema
 const REQUIRED_VALIDATION_MESSAGE = '{PATH} is required!'
 
 let userSchema = new SCHEMA({
-  email: { type: SCHEMA.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
-  password: SCHEMA.Types.String
-  // username: { type: SCHEMA.Types.String, required: REQUIRED_VALIDATION_MESSAGE, unique: true },
-  // firstName: { type: SCHEMA.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
-  // lastName: { type: SCHEMA.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
-  // salt: SCHEMA.Types.String,
-  // hashedPass: SCHEMA.Types.String,
-  // startedTweets: [{ type: SCHEMA.Types.ObjectId, ref: 'Tweet' }],
-  // likes: [{ type: SCHEMA.Types.ObjectId, ref: 'Tweet' }],
-  // dislikes: [{ type: SCHEMA.Types.ObjectId, ref: 'Tweet' }],
-  // roles: [String]
+  email: { type: SCHEMA.Types.String, required: REQUIRED_VALIDATION_MESSAGE, unique: true },
+  password: SCHEMA.Types.String,
+  salt: SCHEMA.Types.String,
+  firstName: { type: SCHEMA.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
+  lastName: { type: SCHEMA.Types.String, required: REQUIRED_VALIDATION_MESSAGE }
 })
 
 userSchema.method({

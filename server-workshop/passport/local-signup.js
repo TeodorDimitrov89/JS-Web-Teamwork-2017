@@ -1,6 +1,7 @@
 const PassportLocalStrategy = require('passport-local').Strategy
-const usersData = require('../data/users')
+const encryption = require('../utilities/encryption')
 const User = require('../models/User')
+const usersData = require('../data/users')
 
 module.exports = new PassportLocalStrategy({
   usernameField: 'email',
@@ -8,30 +9,36 @@ module.exports = new PassportLocalStrategy({
   session: false,
   passReqToCallback: true
 }, (req, email, password, done) => {
-  const user = {
+  const reqUser = {
     email: email.trim(),
     password: password.trim(),
-    name: req.body.name.trim()
+    firstName: req.body.firstName.trim(),
+    lastName: req.body.lastName.trim()
   }
-  let reqUser = req.body
-  console.log(req)
   User
-   .create({
-     email: reqUser.email,
-     password: reqUser.password
+   .findOne({ email: reqUser.email })
+   .then(userFound => {
+     if (!userFound) {
+       let salt = encryption.generateSalt()
+       let hashedPassword = encryption.generateHashedPassword(salt, reqUser.password)
+       User
+         .create({
+           email: reqUser.email,
+           password: hashedPassword,
+           salt: salt,
+           firstName: reqUser.firstName,
+           lastName: reqUser.lastName
+         })
+         .then(userCreated => {
+           return done(null)
+         }).catch(err => {
+           console.log(err)
+         })
+     } else {
+       return done('E-mail already exists!')
+     }
    })
-   .then(user => {
-     console.log(user)
-   }).catch(err => {
+   .catch(err => {
      console.log(err)
    })
-
-  const existingUser = usersData.findByEmail(email)
-  if (existingUser) {
-    return done('E-mail already exists!')
-  }
-
-  usersData.save(user)
-
-  return done(null)
 })
