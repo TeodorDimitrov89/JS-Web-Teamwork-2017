@@ -1,23 +1,29 @@
 {
-  "name": "workshop-pets-system",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "flux": "3.1.2",
-    "jquery": "3.2.1",
-    "query-string": "4.3.4",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-router-dom": "4.1.1",
-    "toastr": "2.1.2"
-  },
-  "devDependencies": {
-    "react-scripts": "1.0.10"
-  },
+  "name": "pets-system",
+  "version": "0.0.1",
+  "description": "Pets system",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "node index.js"
+  },
+  "keywords": [
+    "pets",
+    "system"
+  ],
+  "author": "Ivaylo Kenov",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "1.17.2",
+    "cookie-parser": "1.4.3",
+    "cors": "2.8.3",
+    "express": "4.15.3",
+    "mongoose": "4.10.5",
+    "morgan": "^1.6.1",
+    "express-session": "1.15.3",
+    "swig": "^1.4.2",
+    "jsonwebtoken": "7.4.1",
+    "passport": "0.3.2",
+    "passport-local": "1.0.0",
+    "validator": "7.2.0"
   }
 }
