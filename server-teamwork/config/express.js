@@ -5,8 +5,9 @@ const session = require('express-session')
 const passport = require('passport')
 const path = require('path')
 const cors = require('cors')
-const localSignupStrategy = require('../passport/local-signup')
-const localLoginStrategy = require('../passport/local-login')
+const controllers = require('../controllers')
+const localSignupStrategy = controllers.users.signupStrategy
+const localLoginStrategy = controllers.users.loginStrategy
 const authRoutes = require('../routes/auth')
 const petsRoutes = require('../routes/pets')
 

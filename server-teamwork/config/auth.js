@@ -1,18 +1,9 @@
-module.exports = {
-  isAuthenticated: (req, res, next) => {
-    if (req.isAuthenticated()) {
-      next()
-    } else {
-      res.redirect('/users/login')
-    }
-  },
-  isInRole: (role) => {
-    return (req, res, next) => {
-      if (req.isAuthenticated() && req.user.roles.indexOf('Admin') > -1) {
-        next()
-      } else {
-        res.redirect('/users/login')
-      }
-    }
-  }
-}
+const express = require('express')
+const controllers = require('../controllers')
+
+const router = new express.Router()
+
+router.post('/signup', controllers.users.signup)
+router.post('/login', controllers.users.login)
+
+module.exports = router
