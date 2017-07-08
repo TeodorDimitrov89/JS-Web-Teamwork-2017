@@ -9,7 +9,9 @@ let gadgetSchema = new SCHEMA({
   createdOn: { type: SCHEMA.Types.Date, default: Date.now },
   image: {type: SCHEMA.Types.String},
   comments: [{ type: ObjectId, ref: 'User' }],
-  isBought: { type: SCHEMA.Types.Boolean }
+  quantityOnStock: {type: Number, required: REQUIRED_VALIDATION_MESSAGE},
+  quantityOnSold: {type: Number, required: REQUIRED_VALIDATION_MESSAGE},
+  price: {type: Number, required: REQUIRED_VALIDATION_MESSAGE}
 })
 
 let Gadget = mongoose.model('Gadget', gadgetSchema)

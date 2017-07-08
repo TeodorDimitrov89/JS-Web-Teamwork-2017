@@ -12,9 +12,9 @@ let userSchema = new SCHEMA({
   likes: [{type: ObjectId, ref: 'Gadgets'}],
   dislikes: [{type: ObjectId, ref: 'Gadgets'}],
   comments: [{type: ObjectId, ref: 'Gadgets'}],
-  qtyGadgetsBought: [{type: Number}],
+  qtyGadgetsBought: {type: Number, default: 0},
   isBlocked: {type: Boolean, default: false},
-  roles: [{type: SCHEMA.Types.String}]
+  isAdmin: {type: Boolean}
 })
 
 userSchema.method({
@@ -40,7 +40,7 @@ module.exports.seedAdminUser = () => {
       lastName: 'Admin',
       salt: salt,
       password: hashedPass,
-      roles: ['Admin']
+      isAdmin: true // TODO: add isAdmin to new user
     })
   })
 }

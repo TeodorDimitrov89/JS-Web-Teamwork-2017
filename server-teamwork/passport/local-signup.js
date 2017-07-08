@@ -25,7 +25,8 @@ module.exports = new PassportLocalStrategy({
            password: hashedPassword,
            salt: salt,
            firstName: reqUser.firstName,
-           lastName: reqUser.lastName
+           lastName: reqUser.lastName,
+           isAdmin: false
          })
          .then(userCreated => {
            return done(null)
