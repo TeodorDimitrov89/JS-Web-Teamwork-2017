@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('../models/User')
-
+require('../models/Gadget')
 mongoose.Promise = global.Promise
 
 module.exports = (settings) => {

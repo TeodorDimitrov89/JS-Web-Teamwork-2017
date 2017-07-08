@@ -9,7 +9,7 @@ const controllers = require('../controllers')
 const localSignupStrategy = controllers.users.signupStrategy
 const localLoginStrategy = controllers.users.loginStrategy
 const authRoutes = require('../routes/auth')
-const petsRoutes = require('../routes/pets')
+const gadgetsRoutes = require('../routes/gadgets')
 
 module.exports = (app, settings) => {
   app.use(bodyParser.urlencoded({ extended: false }))
@@ -22,7 +22,7 @@ module.exports = (app, settings) => {
 
 // routes
   app.use('/auth', authRoutes)
-  app.use('/pets', petsRoutes)
+  app.use('/gadgets', gadgetsRoutes)
   app.use(cookieParser())
   app.use(bodyParser.urlencoded({extended: true}))
   app.use(session({
