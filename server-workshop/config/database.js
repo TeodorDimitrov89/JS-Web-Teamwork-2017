@@ -15,7 +15,7 @@ module.exports = (settings) => {
 
     console.log('Connected to MongoDB.')
 
-    // User.seedAdminUser()
+    User.seedAdminUser()
   })
 
   db.on('error', () => {

@@ -41,6 +41,7 @@ function validateSignupForm (payload) {
 }
 
 function validateLoginForm (payload) {
+  console.log(payload)
   const errors = {}
   let isFormValid = true
   let message = ''
@@ -103,7 +104,7 @@ router.post('/login', (req, res, next) => {
 
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
-      if (err.name === 'IncorrectCredentialsError') {
+      if (err.firstName === 'IncorrectCredentialsError') {
         return res.status(200).json({
           success: false,
           message: err.message
@@ -115,7 +116,6 @@ router.post('/login', (req, res, next) => {
         message: 'Could not process the form.'
       })
     }
-    console.log('debug')
     return res.json({
       success: true,
       message: 'You have successfully logged in!',
