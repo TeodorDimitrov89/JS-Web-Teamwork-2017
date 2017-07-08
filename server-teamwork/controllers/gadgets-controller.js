@@ -21,7 +21,7 @@ function validateGadgetForm (payload) {
 
   if (!payload || typeof payload.description !== 'string' || payload.description.trim().length < 10) {
     isFormValid = false
-    errors.description = 'Title must have at least 10 characters.'
+    errors.description = 'Description must have at least 10 characters.'
   }
 
   if (!isFormValid) {
