@@ -32,7 +32,7 @@ function validateGadgetForm (payload) {
     isFormValid = false
     errors.quantity = 'Quantity must be between 0 and 100pcs.'
   }
-  if (!payload || typeof payload.price !== 'number' || !payload.price > 1) {
+  if (!payload || typeof Number(payload.price) !== 'number' || !payload.price > 1) {
     isFormValid = false
     errors.price = 'Price must be greater than 1.'
   }
@@ -193,8 +193,7 @@ module.exports = {
           .then(gadget => {
             res.status(200).json({
               success: true,
-              message: 'Gadget deleted successfuly.',
-              gadget
+              message: 'Gadget deleted successfuly.'
             })
           })
       }).catch(err => {

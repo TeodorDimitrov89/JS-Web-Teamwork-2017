@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import queryString from 'query-string'
 import gadgetActions from '../../actions/GadgetActions'
 import gadgetStore from '../../stores/GadgetStore'
-class ListGadgetsPage extends React.Component { // Smart Component
+class ListGadgetsPage extends React.Component {
   constructor (props) {
     super(props)
     const query = queryString.parse(this.props.location.search)
@@ -55,6 +55,7 @@ class ListGadgetsPage extends React.Component { // Smart Component
     this.props.history.push(`?page=${page}`)
     gadgetActions.all(page)
   }
+
   render () {
     let gadgets = 'No gadgets available'
     if (this.state.gadgets.length > 0) {

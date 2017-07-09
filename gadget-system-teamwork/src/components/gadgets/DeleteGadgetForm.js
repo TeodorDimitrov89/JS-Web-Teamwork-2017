@@ -23,6 +23,19 @@ const DeleteGadgetForm = (props) => (
         placeholder='Image'
         value={props.gadget.image} />
       <br />
+      <Input
+        disabled={props.disabled}
+        type='number'
+        name='quantityOnStock'
+        placeholder='Quantity On Stock'
+        value={props.gadget.quantityOnStock} />
+      <br />
+      <Input
+        disabled={props.disabled}
+        type='number'
+        name='price'
+        placeholder='Price'
+        value={props.gadget.price} />
       <input
         className='btn btn-danger btn-lg'
         type='submit'

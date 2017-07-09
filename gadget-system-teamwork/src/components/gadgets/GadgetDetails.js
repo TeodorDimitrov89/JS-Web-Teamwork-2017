@@ -39,7 +39,6 @@ class GadgetDetails extends React.Component {
         <p>{gadget.description}</p>
         <p>Available on stock: {gadget.quantityOnStock}</p>
         <h3>Price: &euro; {gadget.price}</h3>
-
       </div>
     )
   }

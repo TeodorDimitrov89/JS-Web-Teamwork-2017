@@ -30,7 +30,7 @@ class LoginPage extends React.Component {
       this.handleUserLogin
     )
   }
-  handleUserLogin (data) { // This data is the user data
+  handleUserLogin (data) {
     if (!data.success) {
       let firstError = FormHelpers.getFirstError(data)
       this.setState({error: firstError})
