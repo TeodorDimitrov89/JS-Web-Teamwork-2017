@@ -26,7 +26,9 @@ function validateGadgetForm (payload) {
     isFormValid = false
     errors.description = 'Description must have at least 10 characters.'
   }
-  if (!payload || typeof payload.quantityOnStock !== 'number' || payload.quantityOnStock < 0 || payload.quantityOnStock > 100) {
+
+  if (!payload || (Number(payload.quantityOnStock) < 0 || Number(payload.quantityOnStock) > 100) ||
+  typeof Number(payload.quantityOnStock) !== 'number') {
     isFormValid = false
     errors.quantity = 'Quantity must be between 0 and 100pcs.'
   }
