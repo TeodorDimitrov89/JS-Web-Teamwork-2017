@@ -1,4 +1,5 @@
 const Gadget = require('mongoose').model('Gadget')
+const Comment = require('mongoose').model('Comment')
 const User = require('mongoose').model('User')
 
 function validateGadgetForm (payload) {
@@ -137,20 +138,20 @@ module.exports = {
   },
   deletePost: (req, res) => {
     let idDeleteGadget = req.params.id
-    Gadget
-      .findById(idDeleteGadget)
-      .populate('comments')
-      .then(gadget => {
-        res.status(200).json(gadget)
-      }).catch((err) => {
+    Comment
+      .remove({gadgetId: idDeleteGadget})
+      .then(() => {
+        Gadget.findByIdAndRemove(idDeleteGadget)
+          .then(gadget => {
+            res.status(200).json({
+              success: true,
+              message: 'Gadget deleted successfuly.',
+              gadget
+            })
+          })
+      }).catch(err => {
         console.log(err)
-        return res.status(200).json(err)
+        res.status(200).json(err)
       })
-
-    // Gadget
-    //   .findById(idDeleteGadget)
-    //   .then(gadget => {
-    //     res.status(200).json(gadget)
-    //   })
   }
 }
