@@ -8,9 +8,10 @@ let gadgetSchema = new SCHEMA({
   description: { type: SCHEMA.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
   createdOn: { type: SCHEMA.Types.Date, default: Date.now },
   image: {type: SCHEMA.Types.String},
-  comments: [{ type: ObjectId, ref: 'User' }],
+  comments: [{ type: ObjectId, ref: 'Comments' }],
+  userId: {type: ObjectId, ref: 'User'},
   quantityOnStock: {type: Number, required: REQUIRED_VALIDATION_MESSAGE},
-  quantityOnSold: {type: Number, required: REQUIRED_VALIDATION_MESSAGE},
+  quantityOnSold: {type: Number, default: 0},
   price: {type: Number, required: REQUIRED_VALIDATION_MESSAGE}
 })
 

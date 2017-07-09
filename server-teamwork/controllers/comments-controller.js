@@ -23,7 +23,6 @@ module.exports = {
     let commentAuthor = req.user
     const id = req.params.id
     const user = req.user
-    console.log(req.user._id)
     Gadget
       .findById(id)
       .then(gadget => {
@@ -43,15 +42,28 @@ module.exports = {
         }
         Comment.create({
           content: commentBody.content,
-          author: commentAuthor
+          author: req.user.firstName
         })
         .then(comment => {
-          console.log(comment)
-          res.status(200).json({
-            success: true,
-            message: 'Gadget added successfuly.',
-            gadget
+          gadget.comments.push(comment)
+          gadget.save().then(() => {
+            res.status(200).json({
+              success: true,
+              message: 'Gadget added successfuly.',
+              gadget
+            })
+          }).catch((err) => {
+            res.status(200).json({
+              success: false,
+              errors: err
+            })
           })
+        })
+      }).catch(() => {
+        res.status(200).json({
+          success: false,
+          message: 'Content is required.',
+          errors: 'Content is required.'
         })
       })
   },

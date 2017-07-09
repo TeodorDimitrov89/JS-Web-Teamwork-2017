@@ -56,7 +56,7 @@ module.exports = {
       title: gadgetBody.title,
       image: gadgetBody.image,
       description: gadgetBody.description,
-      quantity: gadgetBody.quantity,
+      quantityOnStock: gadgetBody.quantityOnStock,
       price: gadgetBody.price,
       comments: [],
       isBought: false
@@ -68,8 +68,12 @@ module.exports = {
         gadget
       })
     })
-    .catch(err => {
-      console.log(err)
+    .catch(() => {
+      res.status(200).json({
+        success: false,
+        message: 'Title must be unique.',
+        errors: 'Title must be unique.'
+      })
     })
   },
   all: (page) => {
