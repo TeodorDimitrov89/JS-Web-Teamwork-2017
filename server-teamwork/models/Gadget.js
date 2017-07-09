@@ -11,7 +11,7 @@ let gadgetSchema = new SCHEMA({
   comments: [{ type: ObjectId, ref: 'Comment' }],
   userId: {type: ObjectId, ref: 'User'},
   quantityOnStock: {type: Number, required: REQUIRED_VALIDATION_MESSAGE},
-  quantityOnSold: {type: Number, default: 0},
+  quantitySold: {type: Number, default: 0},
   price: {type: Number, required: REQUIRED_VALIDATION_MESSAGE}
 })
 

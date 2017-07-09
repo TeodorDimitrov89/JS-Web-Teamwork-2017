@@ -17,4 +17,8 @@ router.get('/delete/:id', controllers.gadgets.deleteGet)
 
 router.post('/delete/:id', controllers.gadgets.deletePost)
 
+router.get('/edit/:id', controllers.gadgets.editGet)
+
+router.post('/edit/:id', controllers.gadgets.editPost)
+
 module.exports = router

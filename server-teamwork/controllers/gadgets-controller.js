@@ -119,6 +119,52 @@ module.exports = {
           return res.status(200).json(err)
         })
   },
+  editGet: (req, res) => {
+    let idEditGadget = req.params.id
+    Gadget
+      .findById(idEditGadget)
+      .then(gadget => {
+        if (!gadget) {
+          return res.status(200).json({
+            success: false,
+            message: 'Gadget does not exists!'
+          })
+        }
+        res.status(200).json(gadget)
+      }).catch(err => {
+        console.log(err)
+        res.status(200).json(err)
+      })
+  },
+  editPost: (req, res) => {
+    let idEditGadget = req.params.id
+    let reqbody = req.body
+    let title = reqbody.title
+    let description = reqbody.description
+    let image = req.body.image
+    let quantityOnStock = Number(req.body.quantityOnStock)
+    let price = Number(req.body.price)
+    Gadget
+      .findByIdAndUpdate(idEditGadget, {
+        $set: {
+          title: title,
+          description: description,
+          image: image,
+          quantityOnStock: quantityOnStock,
+          price: price
+        }
+      })
+      .then(gadget => {
+        gadget.save()
+        .then(() => {
+          return res.status(200).json({
+            success: true,
+            message: 'Edit successfull!',
+            gadget
+          })
+        })
+      })
+  },
   deleteGet: (req, res) => {
     let idDeleteGadget = req.params.id
     Gadget
