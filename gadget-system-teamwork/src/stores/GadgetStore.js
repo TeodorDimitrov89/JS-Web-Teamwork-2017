@@ -19,6 +19,15 @@ class GadgetStore extends EventEmitter {
         this.emit(this.eventTypes.GADGET_FETCHED, data)
       })
   }
+  details (gadgetId) {
+
+    GadgetData
+      .details(gadgetId)
+      .then(data => {
+        this.emit(this.eventTypes.GADGET_DETAILS, data)
+      })
+  }
+
   handleAction (action) {
     switch (action.type) {
       case gadgetActions.types.CREATE_GADGET: {
@@ -27,6 +36,10 @@ class GadgetStore extends EventEmitter {
       }
       case gadgetActions.types.ALL_GADGETS: {
         this.all(action.page)
+        break
+      }
+      case gadgetActions.types.GADGET_DETAILS: {
+        this.details(action.gadgetId)
         break
       }
       default: break

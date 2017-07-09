@@ -24,6 +24,20 @@ const CreateGadgetForm = (props) => (
         value={props.gadget.image}
         onChange={props.onChange} />
       <br />
+      <Input
+        type='number'
+        name='quantityOnStock'
+        placeholder='Quantity On Stock'
+        value={props.gadget.quantityOnStock}
+        onChange={props.onChange} />
+      <br />
+      <Input
+        type='number'
+        name='price'
+        placeholder='Price'
+        value={props.gadget.price}
+        onChange={props.onChange} />
+      <br />
       <input
         className='btn btn-primary btn-lg'
         type='submit'

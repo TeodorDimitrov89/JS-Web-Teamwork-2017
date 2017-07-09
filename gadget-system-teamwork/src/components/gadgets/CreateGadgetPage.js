@@ -14,6 +14,8 @@ class CreateGadgetPage extends React.Component {
         title: 'Pesho',
         description: 'Some whatever description',
         image: 'https://static.pexels.com/photos/126407/pexels-photo-126407.jpeg',
+        quantityOnStock: 15,
+        price: 2
       },
       error: ''
     }

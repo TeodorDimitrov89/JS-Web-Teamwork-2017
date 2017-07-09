@@ -63,7 +63,7 @@ class ListGadgetsPage extends React.Component { // Smart Component
           <div key={gadget._id}>
             <p>{gadget._id} - {gadget.title}</p>
             <br />
-            <Link to='#'>Details</Link>
+            <Link to={`/gadgets/details/${gadget._id}`}>Details</Link>
           </div>
         )
       })
@@ -71,7 +71,7 @@ class ListGadgetsPage extends React.Component { // Smart Component
 
     return (
       <div>
-        <h1>All Pets</h1>
+        <h1>All Gadgets</h1>
         {gadgets}
         <div>
           <button className='btn btn-primary' onClick={this.goToPrevPage}>Prev</button>

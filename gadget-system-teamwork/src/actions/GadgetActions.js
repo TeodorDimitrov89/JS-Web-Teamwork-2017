@@ -3,7 +3,8 @@ import dispatcher from '../dispatcher/dispatcher'
 const gadgetActions = {
   types: {
     CREATE_GADGET: 'CREATE_GADGET',
-    ALL_GADGETS: 'ALL_GADGETS'
+    ALL_GADGETS: 'ALL_GADGETS',
+    GADGET_DETAILS: 'GADGET_DETAILS'
   },
   create (gadget) {
     dispatcher.dispatch({
@@ -16,6 +17,12 @@ const gadgetActions = {
     dispatcher.dispatch({
       type: this.types.ALL_GADGETS,
       page
+    })
+  },
+  details (gadgetId) {
+    dispatcher.dispatch({
+      type: this.types.GADGET_DETAILS,
+      gadgetId
     })
   }
 }
