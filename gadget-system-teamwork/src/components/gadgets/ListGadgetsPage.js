@@ -61,8 +61,11 @@ class ListGadgetsPage extends React.Component { // Smart Component
       gadgets = this.state.gadgets.map(gadget => {
         return (
           <div key={gadget._id}>
-            <p>{gadget._id} - {gadget.title}</p>
-            <br />
+            <h2><strong>Title: </strong>{gadget.title}</h2>
+            <p><strong>Description: </strong>{gadget.description}</p>
+            <img src={`${gadget.image}`} alt={`${gadget.title}`} />
+            <p><strong>Quantity on stock: </strong>{gadget.quantityOnStock}</p>
+            <Link to={`/gadgets/delete/${gadget._id}`}>Delete</Link>
             <Link to={`/gadgets/details/${gadget._id}`}>Details</Link>
           </div>
         )

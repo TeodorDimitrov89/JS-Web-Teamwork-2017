@@ -13,6 +13,9 @@ class GadgetData {
   static details (gadgetId) {
     return Data.get(`${baseUrl}/details/${gadgetId}`, true)
   }
+  static deleteGet (id) { // TODO: change id to gadgetId
+    return Data.get(`${baseUrl}/delete/${id}`, true) // TODO: check if user is admin
+  }
 }
 
 export default GadgetData

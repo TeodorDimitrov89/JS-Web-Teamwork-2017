@@ -20,11 +20,17 @@ class GadgetStore extends EventEmitter {
       })
   }
   details (gadgetId) {
-
     GadgetData
       .details(gadgetId)
       .then(data => {
         this.emit(this.eventTypes.GADGET_DETAILS, data)
+      })
+  }
+  getDeleteForm (id) {
+    GadgetData
+      .deleteGet(id)
+      .then(deleteGadget => {
+        this.emit(this.eventTypes.DELETE_GADGET_FETCHED, deleteGadget)
       })
   }
 
@@ -42,6 +48,10 @@ class GadgetStore extends EventEmitter {
         this.details(action.gadgetId)
         break
       }
+      case gadgetActions.types.FETCH_DELETE_GADGET: {
+        this.getDeleteForm(action.id)
+        break
+      }
       default: break
     }
   }
@@ -49,7 +59,8 @@ class GadgetStore extends EventEmitter {
 let gadgetStore = new GadgetStore()
 gadgetStore.eventTypes = {
   GADGET_CREATED: 'gadget_created',
-  GADGET_FETCHED: 'gadget_fetched'
+  GADGET_FETCHED: 'gadget_fetched',
+  DELETE_GADGET_FETCHED: 'delete_gadget_fetched'
 }
 dispatcher.register(gadgetStore.handleAction.bind(gadgetStore))
 export default gadgetStore

@@ -3,7 +3,7 @@ import gadgetActions from '../../actions/GadgetActions'
 import gadgetStore from '../../stores/GadgetStore'
 
 class GadgetDetails extends React.Component {
-  constructor(props){
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -29,13 +29,13 @@ class GadgetDetails extends React.Component {
     this.setState({gadget: data})
   }
 
-  render(){
+  render () {
     let gadget = this.state.gadget
 
     return (
       <div>
         <h1>{gadget.title}</h1>
-        <img  src={gadget.image} alt={gadget.title}/>
+        <img src={gadget.image} alt={gadget.title} />
         <p>{gadget.description}</p>
         <p>Available on stock: {gadget.quantityOnStock}</p>
         <h3>Price: &euro; {gadget.price}</h3>

@@ -4,7 +4,8 @@ const gadgetActions = {
   types: {
     CREATE_GADGET: 'CREATE_GADGET',
     ALL_GADGETS: 'ALL_GADGETS',
-    GADGET_DETAILS: 'GADGET_DETAILS'
+    GADGET_DETAILS: 'GADGET_DETAILS',
+    FETCH_DELETE_GADGET: 'FETCH_DELETE_GADGET'
   },
   create (gadget) {
     dispatcher.dispatch({
@@ -23,6 +24,12 @@ const gadgetActions = {
     dispatcher.dispatch({
       type: this.types.GADGET_DETAILS,
       gadgetId
+    })
+  },
+  deleteGet (id) {
+    dispatcher.dispatch({
+      type: this.types.FETCH_DELETE_GADGET,
+      id
     })
   }
 }

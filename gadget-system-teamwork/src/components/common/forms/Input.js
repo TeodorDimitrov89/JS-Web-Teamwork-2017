@@ -8,6 +8,7 @@ const Input = (props) => {
         type={type}
         name={props.name}
         value={props.value}
+        disabled={props.disabled}
         placeholder={props.placeholder}
         onChange={props.onChange} />
     </div>
