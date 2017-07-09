@@ -11,7 +11,6 @@ let userSchema = new SCHEMA({
   lastName: { type: SCHEMA.Types.String, required: REQUIRED_VALIDATION_MESSAGE },
   likes: [{type: ObjectId, ref: 'Gadgets'}],
   dislikes: [{type: ObjectId, ref: 'Gadgets'}],
-  comments: [{type: ObjectId, ref: 'Gadgets'}],
   qtyGadgetsBought: {type: Number, default: 0},
   isBlocked: {type: Boolean, default: false},
   isAdmin: {type: Boolean}

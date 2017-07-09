@@ -7,7 +7,7 @@ let commentSchema = new SCHEMA({
   content: { type: String, required: REQUIRED_VALIDATION_MESSAGE },
   date: { type: Date, default: Date.now },
   author: {type: String},
-  gadgetsId: {type: ObjectId, ref: 'Gadgets'},
+  gadgetId: {type: ObjectId, ref: 'Gadgets'},
   userId: {type: ObjectId, ref: 'User'}
 })
 

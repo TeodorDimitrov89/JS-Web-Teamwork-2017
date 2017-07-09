@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken')
 const User = require('mongoose').model('User')
 module.exports = {
   isAuthenticated: (req, res, next) => {
-    console.log('IsAuthenticated: here')
     if (!req.headers.authorization) {
       return res.status(401).end()
     }

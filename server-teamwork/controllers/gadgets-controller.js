@@ -1,4 +1,6 @@
 const Gadget = require('mongoose').model('Gadget')
+const User = require('mongoose').model('User')
+
 function validateGadgetForm (payload) {
   const errors = {}
   let isFormValid = true
@@ -44,6 +46,7 @@ function validateGadgetForm (payload) {
 module.exports = {
   create: (req, res) => {
     let gadgetBody = req.body
+    let userId = req.user._id
     const validationResult = validateGadgetForm(gadgetBody)
     if (!validationResult.success) {
       return res.status(200).json({
@@ -57,6 +60,7 @@ module.exports = {
       image: gadgetBody.image,
       description: gadgetBody.description,
       quantityOnStock: gadgetBody.quantityOnStock,
+      userId: userId,
       price: gadgetBody.price,
       comments: [],
       isBought: false
@@ -76,8 +80,9 @@ module.exports = {
       })
     })
   },
-  all: (page) => {
-    return new Promise((resolve, reject) => {
+  all: (req, res) => {
+    const page = parseInt(req.query.page) || 1
+    let getGadgets = new Promise((resolve, reject) => {
       const pageSize = 3
       Gadget
         .find({})
@@ -86,8 +91,14 @@ module.exports = {
         .then(gadgets => {
           return resolve(gadgets)
         })
-        .catch(err => console.log(err))
+        .catch(err => res.status(200).json(err))
     })
+
+    getGadgets
+      .then(gadget => {
+        res.status(200).json(gadget)
+      })
+      .catch(err => res.status(200).json(err))
   },
   getDetails: (req, res) => {
     const id = req.params.id
@@ -106,5 +117,40 @@ module.exports = {
           console.log(err)
           return res.status(200).json(err)
         })
+  },
+  deleteGet: (req, res) => {
+    let idDeleteGadget = req.params.id
+    Gadget
+      .findById(idDeleteGadget)
+      .then(gadget => {
+        if (!gadget) {
+          return res.status(200).json({
+            success: false,
+            message: 'Gadget does not exists!'
+          })
+        }
+        res.status(200).json(gadget)
+      }).catch(err => {
+        console.log(err)
+        res.status(200).json(err)
+      })
+  },
+  deletePost: (req, res) => {
+    let idDeleteGadget = req.params.id
+    Gadget
+      .findById(idDeleteGadget)
+      .populate('comments')
+      .then(gadget => {
+        res.status(200).json(gadget)
+      }).catch((err) => {
+        console.log(err)
+        return res.status(200).json(err)
+      })
+
+    // Gadget
+    //   .findById(idDeleteGadget)
+    //   .then(gadget => {
+    //     res.status(200).json(gadget)
+    //   })
   }
 }

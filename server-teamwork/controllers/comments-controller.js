@@ -20,11 +20,10 @@ function validateCommentForm (payload) {
 module.exports = {
   create: (req, res) => {
     const commentBody = req.body
-    let commentAuthor = req.user
-    const id = req.params.id
-    const user = req.user
+    const commentAuthor = req.user
+    const gadgetid = req.params.id
     Gadget
-      .findById(id)
+      .findById(gadgetid)
       .then(gadget => {
         if (!gadget) {
           return res.status(200).json({
@@ -42,7 +41,10 @@ module.exports = {
         }
         Comment.create({
           content: commentBody.content,
-          author: req.user.firstName
+          author: commentAuthor.firstName,
+          gadgetId: gadget._id,
+          userId: commentAuthor._id
+
         })
         .then(comment => {
           gadget.comments.push(comment)
@@ -50,7 +52,7 @@ module.exports = {
             res.status(200).json({
               success: true,
               message: 'Gadget added successfuly.',
-              gadget
+              comment
             })
           }).catch((err) => {
             res.status(200).json({
@@ -67,15 +69,20 @@ module.exports = {
         })
       })
   },
-  all: (page) => {
-    return new Promise((resolve, reject) => {
-      const pageSize = 3
-      Gadget.find({})
-        .skip((page - 1) * pageSize)
-        .limit(pageSize)
-        .then(gadgets => {
-          return resolve(gadgets)
+  all: (req, res) => {
+    Comment
+      .find({})
+      .then(comments => {
+        res.status(200).json({
+          success: true,
+          comments: comments
         })
-    })
+      }).catch(() => {
+        res.status(200).json({
+          success: false,
+          message: 'Content is required.',
+          errors: 'Content is required.'
+        })
+      })
   }
 }
