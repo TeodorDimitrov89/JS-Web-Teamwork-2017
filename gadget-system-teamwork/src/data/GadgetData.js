@@ -13,6 +13,12 @@ class GadgetData {
   static details (gadgetId) {
     return Data.get(`${baseUrl}/details/${gadgetId}`, true)
   }
+  static editGet (gadgetId) {
+    return Data.get(`${baseUrl}/edit/${gadgetId}`, true) // TODO: check if user is admin
+  }
+  static editPost (dataEditGadget) {
+    return Data.post(`${baseUrl}/edit/${dataEditGadget._id}`, dataEditGadget, true) // TODO: check if user is admin
+  }
   static deleteGet (gadgetId) {
     return Data.get(`${baseUrl}/delete/${gadgetId}`, true) // TODO: check if user is admin
   }

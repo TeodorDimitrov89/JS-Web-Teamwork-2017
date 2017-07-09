@@ -5,8 +5,9 @@ import ListGadgetsPage from '../../gadgets/ListGadgetsPage'
 import RegisterPage from '../../users/RegisterPage'
 import LoginPage from '../../users/LoginPage'
 import CreateGadgetPage from '../../gadgets/CreateGadgetPage'
-import GadgetDetails from '../../gadgets/GadgetDetails'
+import GadgetDetailsPage from '../../gadgets/GadgetDetails'
 import DeleteGadgetPage from '../../gadgets/DeleteGadgetPage'
+import EditGadgetPage from '../../gadgets/EditGadgetPage'
 import LogoutPage from '../../users/LogoutPage'
 
 const Routes = (props) => (
@@ -15,7 +16,8 @@ const Routes = (props) => (
     <Route path='/users/register' component={RegisterPage} />
     <Route path='/users/login' component={LoginPage} />
     <PrivateRoute path='/gadgets/add' component={CreateGadgetPage} />
-    <PrivateRoute path='/gadgets/details/:id' component={GadgetDetails} />
+    <PrivateRoute path='/gadgets/details/:id' component={GadgetDetailsPage} />
+    <PrivateRoute path='/gadgets/edit/:id' component={EditGadgetPage} />
     <PrivateRoute path='/gadgets/delete/:id' component={DeleteGadgetPage} />
     <PrivateRoute path='/users/logout' component={LogoutPage} />
   </Switch>

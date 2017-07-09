@@ -61,12 +61,13 @@ class ListGadgetsPage extends React.Component {
     if (this.state.gadgets.length > 0) {
       gadgets = this.state.gadgets.map(gadget => {
         return (
-          <div key={gadget._id}>
+          <div className='allGadgets' key={gadget._id}>
             <h2><strong>Title: </strong>{gadget.title}</h2>
             <p><strong>Description: </strong>{gadget.description}</p>
             <img src={`${gadget.image}`} alt={`${gadget.title}`} />
             <p><strong>Quantity on stock: </strong>{gadget.quantityOnStock}</p>
             <Link to={`/gadgets/delete/${gadget._id}`}>Delete</Link>
+            <Link to={`/gadgets/edit/${gadget._id}`}>Edit</Link>
             <Link to={`/gadgets/details/${gadget._id}`}>Details</Link>
           </div>
         )

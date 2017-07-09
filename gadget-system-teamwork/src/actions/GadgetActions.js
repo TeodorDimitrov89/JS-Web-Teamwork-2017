@@ -5,6 +5,8 @@ const gadgetActions = {
     CREATE_GADGET: 'CREATE_GADGET',
     ALL_GADGETS: 'ALL_GADGETS',
     GADGET_DETAILS: 'GADGET_DETAILS',
+    FETCH_EDIT_GADGET: 'FETCH_EDIT_GADGET',
+    POST_EIDT_GADGET: 'POST_EIDT_GADGET',
     FETCH_DELETE_GADGET: 'FETCH_DELETE_GADGET',
     POST_DELETE_GADGET: 'POST_DELETE_GADGET'
   },
@@ -37,6 +39,18 @@ const gadgetActions = {
     dispatcher.dispatch({
       type: this.types.POST_DELETE_GADGET,
       gadgetId
+    })
+  },
+  editGet (gadgetId) {
+    dispatcher.dispatch({
+      type: this.types.FETCH_EDIT_GADGET,
+      gadgetId
+    })
+  },
+  editPost (dataEditedGadget) {
+    dispatcher.dispatch({
+      type: this.types.POST_EIDT_GADGET,
+      dataEditedGadget
     })
   }
 }
