@@ -8,5 +8,8 @@ class UserData {
   static login (user) {
     return Data.post(`${baseUrl}/login`, user)
   }
+  static getAll () {
+    return Data.get(`${baseUrl}/all`, true)
+  }
 }
 export default UserData

@@ -26,9 +26,15 @@ const RegisterForm = (props) => ( // Dumb Component
         onChange={props.onChange} />
       <br />
       <Input
-        name='name'
-        value={props.user.name}
-        placeholder='Name'
+        name='firstName'
+        value={props.user.firstName}
+        placeholder='First Name'
+        onChange={props.onChange} />
+      <br />
+      <Input
+        name='lastName'
+        value={props.user.lastName}
+        placeholder='Last Name'
         onChange={props.onChange} />
       <input type='submit' value='register' onClick={props.onSave} />
     </form>

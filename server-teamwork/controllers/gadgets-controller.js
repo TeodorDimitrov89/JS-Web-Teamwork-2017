@@ -1,6 +1,5 @@
 const Gadget = require('mongoose').model('Gadget')
 const Comment = require('mongoose').model('Comment')
-const User = require('mongoose').model('User')
 
 function validateGadgetForm (payload) {
   const errors = {}
@@ -161,7 +160,7 @@ module.exports = {
         .then(() => {
           return res.status(200).json({
             success: true,
-            message: 'Edit successfull!',
+            message: 'Edit successful!',
             gadget
           })
         })

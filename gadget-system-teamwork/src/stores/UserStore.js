@@ -14,6 +14,11 @@ class UserStore extends EventEmitter {
       .login(user)
       .then(data => this.emit(this.eventTypes.USER_LOGGED_IN, data))
   }
+  getAllUsers () {
+    UserData
+      .getAll()
+      .then(data => this.emit(this.eventTypes.USER_FETCHED, data))
+  }
   handleAction (action) {
     switch (action.type) {
       case userActions.types.REGISTER_USER: {
@@ -24,6 +29,10 @@ class UserStore extends EventEmitter {
         this.login(action.user)
         break
       }
+      case userActions.types.FETCH_USERS: {
+        this.getAllUsers()
+        break
+      }
       default: break
     }
   }
@@ -31,7 +40,8 @@ class UserStore extends EventEmitter {
 let userStore = new UserStore()
 userStore.eventTypes = {
   USER_REGISTERED: 'user_registered',
-  USER_LOGGED_IN: 'user_logged_in'
+  USER_LOGGED_IN: 'user_logged_in',
+  USER_FETCHED: 'user_fetched'
 }
 dispatcher.register(userStore.handleAction.bind(userStore))
 export default userStore

@@ -28,6 +28,9 @@ class Navbar extends React.Component {
               <Link to='/'>Home</Link>
               <span>{this.state.username}</span>
               <Link to='/gadgets/add'>Add Gadget</Link>
+              {Auth.isUserAdmin() ? (
+                <Link to='/users/admin-panel'>Admin Panel</Link>
+              ) : ''}
               <Link to='/users/logout'>Logout</Link>
             </nav>
           </div>

@@ -11,9 +11,10 @@ class RegisterPage extends React.Component { // Smart Component
     this.state = {
       user: {
         email: 'test@test.bg',
-        password: '123456',
-        confirmPassword: '123456',
-        name: 'test'
+        password: 'test',
+        confirmPassword: 'test',
+        firstName: 'test',
+        lastName: 'testerski'
       },
       error: ''
     }

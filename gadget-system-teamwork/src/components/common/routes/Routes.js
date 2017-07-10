@@ -8,6 +8,7 @@ import CreateGadgetPage from '../../gadgets/CreateGadgetPage'
 import GadgetDetailsPage from '../../gadgets/GadgetDetails'
 import DeleteGadgetPage from '../../gadgets/DeleteGadgetPage'
 import EditGadgetPage from '../../gadgets/EditGadgetPage'
+import AdminPanelPage from '../../users/AdminPanelPage'
 import LogoutPage from '../../users/LogoutPage'
 
 const Routes = (props) => (
@@ -19,6 +20,7 @@ const Routes = (props) => (
     <PrivateRoute path='/gadgets/details/:id' component={GadgetDetailsPage} />
     <PrivateRoute path='/gadgets/edit/:id' component={EditGadgetPage} />
     <PrivateRoute path='/gadgets/delete/:id' component={DeleteGadgetPage} />
+    <PrivateRoute path='/users/admin-panel' component={AdminPanelPage} />
     <PrivateRoute path='/users/logout' component={LogoutPage} />
   </Switch>
 )

@@ -2,6 +2,7 @@ const validator = require('validator')
 const passport = require('passport')
 const localSignupStrategy = require('../passport/local-signup')
 const localLoginStrategy = require('../passport/local-login')
+const User = require('mongoose').model('User')
 
 module.exports = {
   signupStrategy: localSignupStrategy,
@@ -64,6 +65,34 @@ module.exports = {
         user: userData
       })
     })(req, res, next)
+  },
+  all: (req, res, next) => {
+    const page = parseInt(req.query.page) || 1
+    let getUsers = new Promise((resolve, reject) => {
+      const pageSize = 10
+      User
+        .find({})
+        .skip((page - 1) * pageSize)
+        .limit(pageSize)
+        .then(users => {
+          return resolve(users)
+        })
+        .catch(err => res.status(200).json({
+          success: false,
+          errors: err
+        }))
+    })
+    getUsers
+      .then(users => {
+        return res.status(200).json({
+          success: true,
+          users
+        })
+      })
+      .catch(err => res.status(200).json({
+        success: false,
+        errors: err
+      }))
   }
 }
 

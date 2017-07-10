@@ -18,6 +18,10 @@ class Auth {
   static isUserAuthenticated () {
     return window.localStorage.getItem('token') !== null
   }
+  static isUserAdmin () {
+    let parsedUser = JSON.parse(window.localStorage.getItem('user'))
+    return parsedUser.isAdmin
+  }
   static deauthenticateUser () {
     window.localStorage.removeItem('token')
   }
