@@ -1,3 +1,13 @@
+.error-template {padding: 40px 15px;text-align: center;}
+textarea { resize: none; }
+.form-control {
+  width: 40%!important;
+  margin: 0 auto;
+}
+.center {
+  margin-left: 50px;
+}
+
 .App {
   text-align: center;
 }

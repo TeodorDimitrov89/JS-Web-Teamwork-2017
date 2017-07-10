@@ -69,20 +69,31 @@ module.exports = {
         })
       })
   },
-  all: (req, res) => {
-    Comment
-      .find({})
-      .then(comments => {
+   all: (req, res) => {
+    const gadgetId = req.params.id
+    Gadget
+      .findById(gadgetId)
+      .populate('comments')
+      .then((gadget) => {
         res.status(200).json({
           success: true,
-          comments: comments
-        })
-      }).catch(() => {
-        res.status(200).json({
-          success: false,
-          message: 'Content is required.',
-          errors: 'Content is required.'
+          gadgetTitle: gadget.title,
+          comments: gadget.comments
         })
       })
+    // Comment
+    //   .find({})
+    //   .then(comments => {
+    //     res.status(200).json({
+    //       success: true,
+    //       comments: comments
+    //     })
+    //   }).catch(() => {
+    //     res.status(200).json({
+    //       success: false,
+    //       message: 'Content is required.',
+    //       errors: 'Content is required.'
+    //     })
+    //   })
   }
 }

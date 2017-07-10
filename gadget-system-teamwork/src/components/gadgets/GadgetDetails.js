@@ -1,7 +1,7 @@
 import React from 'react'
 import gadgetActions from '../../actions/GadgetActions'
 import gadgetStore from '../../stores/GadgetStore'
-
+import { Link } from 'react-router-dom'
 class GadgetDetails extends React.Component {
   constructor (props) {
     super(props)
@@ -39,6 +39,7 @@ class GadgetDetails extends React.Component {
         <p>{gadget.description}</p>
         <p>Available on stock: {gadget.quantityOnStock}</p>
         <h3>Price: &euro; {gadget.price}</h3>
+        <Link to={`/gadgets/details/${gadget._id}/comments/create`}>Leave a Comment</Link>
       </div>
     )
   }
