@@ -7,11 +7,20 @@ router.post('/create', authCheck.isAuthenticated, authCheck.isAdmin(), controlle
 
 router.get('/all', controllers.gadgets.all)
 
-router.get('/details/:id', authCheck.isAuthenticated, controllers.gadgets.getDetails)
+// Comment Routes
 
 router.post('/details/:id/comments/create', authCheck.isAuthenticated, controllers.comments.create)
 
-router.get('/details/:id/comments/all', controllers.comments.all)
+router.get('/details/delete/comment/:id', controllers.comments.deleteGet)
+
+router.post('/details/delete/comment/:id', controllers.comments.deletePost)
+
+router.get('/details/edit/comment/:id', controllers.comments.editGet)
+
+router.post('/details/edit/comment/:id', controllers.comments.editPost)
+
+// Gadget Routes
+router.get('/details/:id', authCheck.isAuthenticated, controllers.gadgets.getDetails)
 
 router.get('/delete/:id', controllers.gadgets.deleteGet)
 

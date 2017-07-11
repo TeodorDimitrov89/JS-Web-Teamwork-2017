@@ -2,7 +2,7 @@ import React from 'react'
 import TextArea from '../common/forms/TextArea'
 const CreateCommentForm = (props) => (
   <div>
-    <h2>Create Comment Form</h2>
+    <h2>Gadget Title: {props.gadgetTitle}</h2>
     <form>
       <div className='error'>{props.error}</div>
       <TextArea

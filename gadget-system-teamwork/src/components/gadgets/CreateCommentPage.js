@@ -30,7 +30,6 @@ class CreateCommentPage extends React.Component {
       this.handleCommentCreation)
   }
   handleCommentCreation (data) {
-    console.log(data)
     if (!data.success) {
       let firstError = FormHelpers.getFirstError(data)
       this.setState({error: firstError})
@@ -57,9 +56,11 @@ class CreateCommentPage extends React.Component {
     return ValidateHelpers.validateCommentCreate.bind(this)(comment)
   }
   render () {
+    let gadgetTitle = this.props.match.params.title.replace(/[-]+/g, ' ')
     return (
       <div className='container'>
         <CreateCommentForm
+          gadgetTitle={gadgetTitle}
           comment={this.state.comment}
           error={this.state.error}
           onChange={this.handleCommentChange}

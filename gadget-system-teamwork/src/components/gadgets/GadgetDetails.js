@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import gadgetActions from '../../actions/GadgetActions'
 import gadgetStore from '../../stores/GadgetStore'
-import { Link } from 'react-router-dom'
+import ListCommentPage from '../sub-components/ListCommentPage'
 class GadgetDetails extends React.Component {
   constructor (props) {
     super(props)
@@ -11,11 +12,11 @@ class GadgetDetails extends React.Component {
       gadget: {}
     }
     this.handleGadgetFetching = this.handleGadgetFetching.bind(this)
-
     gadgetStore.on(
       gadgetStore.eventTypes.GADGET_DETAILS,
       this.handleGadgetFetching)
   }
+
   componentDidMount () {
     gadgetActions.details(this.state.gadgetId)
   }
@@ -28,9 +29,24 @@ class GadgetDetails extends React.Component {
   handleGadgetFetching (data) {
     this.setState({gadget: data})
   }
-
   render () {
     let gadget = this.state.gadget
+    let gadgetTitle
+    let listComments
+    if (Object.keys(gadget).length !== 0) {
+      gadgetTitle = gadget.title.replace(/[\s]+/g, '-')
+      listComments = gadget.comments.map((comment, index) => {
+        return (
+          <ListCommentPage
+            index={index + 1}
+            commentId={comment._id}
+            key={comment._id}
+            content={comment.content}
+            author={comment.author}
+            date={comment.date} />
+        )
+      })
+    }
 
     return (
       <div>
@@ -39,7 +55,8 @@ class GadgetDetails extends React.Component {
         <p>{gadget.description}</p>
         <p>Available on stock: {gadget.quantityOnStock}</p>
         <h3>Price: &euro; {gadget.price}</h3>
-        <Link to={`/gadgets/details/${gadget._id}/comments/create`}>Leave a Comment</Link>
+        <Link to={`/gadgets/details/${gadget._id}/comments/create/${gadgetTitle}`}>Leave a Comment</Link>
+        {listComments}
       </div>
     )
   }

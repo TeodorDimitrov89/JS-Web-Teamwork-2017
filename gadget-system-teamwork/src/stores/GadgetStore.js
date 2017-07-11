@@ -2,7 +2,6 @@ import { EventEmitter } from 'events'
 import dispatcher from '../dispatcher/dispatcher'
 import gadgetActions from '../actions/GadgetActions'
 import GadgetData from '../data/GadgetData'
-
 class GadgetStore extends EventEmitter {
   create (gadget) {
     GadgetData
@@ -22,9 +21,9 @@ class GadgetStore extends EventEmitter {
   details (gadgetId) {
     GadgetData
       .details(gadgetId)
-      .then(data => {
-        this.emit(this.eventTypes.GADGET_DETAILS, data)
-      })
+       .then(data => {
+         this.emit(this.eventTypes.GADGET_DETAILS, data)
+       })
   }
   getEditForm (gadgetId) {
     GadgetData

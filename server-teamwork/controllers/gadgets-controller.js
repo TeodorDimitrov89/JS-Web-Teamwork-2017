@@ -106,6 +106,7 @@ module.exports = {
     const id = req.params.id
     Gadget
         .findById(id)
+        .populate('comments')
         .then(gadget => {
           if (!gadget) {
             return res.status(200).json({

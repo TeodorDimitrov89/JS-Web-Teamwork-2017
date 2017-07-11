@@ -7,7 +7,33 @@ textarea { resize: none; }
 .center {
   margin-left: 50px;
 }
-
+.comments {
+  width: 300px;
+  margin: 0 auto;
+}
+.comment-box {
+  border-radius: 40px;
+  border: 1px solid black;
+  background: #ddd;
+  /*width: 30%;*/
+  word-wrap: break-word;
+  margin:  0 auto;
+  padding: 10px;
+  text-align: center;
+  margin: 10px;
+}
+.comment-count {
+  padding-right: 10px;
+  font-weight: bold;
+}
+.btn.btn-sm.btn-danger.btn-block,
+.btn.btn-sm.btn-info.btn-block {
+  width: 100px;
+  margin: 12px auto;
+  margin-left: 10px;
+  display: inline-block;
+  border-radius: 10px;
+}
 .App {
   text-align: center;
 }

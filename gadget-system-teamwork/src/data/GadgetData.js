@@ -23,7 +23,7 @@ class GadgetData {
     return Data.get(`${baseUrl}/delete/${gadgetId}`, true) // TODO: check if user is admin
   }
   static deletePost (gadgetId) {
-    return Data.delete(`${baseUrl}/delete/${gadgetId}`, true) // TODO: check if user is admin
+    return Data.post(`${baseUrl}/delete/${gadgetId}`, {}, true) // TODO: check if user is admin
   }
 }
 

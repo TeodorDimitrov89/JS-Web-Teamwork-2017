@@ -11,6 +11,7 @@ class CommentStore extends EventEmitter {
         this.emit(this.eventTypes.COMMENT_CREATED, data)
       })
   }
+
   handleAction (action) {
     switch (action.type) {
       case commentActions.types.CREATE_COMMENT: {

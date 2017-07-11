@@ -44,14 +44,13 @@ module.exports = {
           author: commentAuthor.firstName,
           gadgetId: gadget._id,
           userId: commentAuthor._id
-
         })
         .then(comment => {
           gadget.comments.push(comment)
           gadget.save().then(() => {
             res.status(200).json({
               success: true,
-              message: 'Gadget added successfuly.',
+              message: 'Gadget added successfully.',
               comment
             })
           }).catch((err) => {
@@ -69,31 +68,109 @@ module.exports = {
         })
       })
   },
-   all: (req, res) => {
-    const gadgetId = req.params.id
-    Gadget
-      .findById(gadgetId)
-      .populate('comments')
-      .then((gadget) => {
+  deleteGet (req, res) {
+    const commentId = req.params.id
+    Comment
+    .findById(commentId)
+    .then(comment => {
+      if (!comment) {
+        return res.status(200).json({
+          success: false,
+          message: 'Comment does not exists!'
+        })
+      }
+      res.status(200).json({
+        success: true,
+        comment
+      })
+    })
+    .catch(() => {
+      res.status(200).json({
+        success: false,
+        message: 'Content is required.',
+        errors: 'Content is required.'
+      })
+    })
+  },
+  deletePost (req, res) {
+    const commentId = req.params.id
+    Comment
+    .findByIdAndRemove(commentId)
+    .then(deletedComment => {
+      if (!deletedComment) {
+        return res.status(200).json({
+          success: false,
+          message: 'Comment does not exists!'
+        })
+      }
+      res.status(200).json({
+        success: true,
+        message: 'Comment deleted successfully',
+        deletedComment
+      })
+    }).catch(err => {
+      console.log(err)
+      res.status(200).json({
+        success: false,
+        message: '',
+        errors: '' // TODO: change message and error
+      })
+    })
+  },
+  editGet (req, res) {
+    const commentId = req.params.id
+    Comment
+      .findById(commentId)
+      .then(comment => {
+        if (!comment) {
+          return res.status(200).json({
+            success: false,
+            message: 'Comment does not exists!'
+          })
+        }
         res.status(200).json({
           success: true,
-          gadgetTitle: gadget.title,
-          comments: gadget.comments
+          comment
+        })
+      }).catch(err => {
+        console.log(err)
+        res.status(200).json({
+          success: false,
+          message: '',
+          errors: '' // TODO: change message and error
         })
       })
-    // Comment
-    //   .find({})
-    //   .then(comments => {
-    //     res.status(200).json({
-    //       success: true,
-    //       comments: comments
-    //     })
-    //   }).catch(() => {
-    //     res.status(200).json({
-    //       success: false,
-    //       message: 'Content is required.',
-    //       errors: 'Content is required.'
-    //     })
-    //   })
+  },
+  editPost (req, res) {
+    const commentId = req.params.id
+    const commentBody = req.body
+    const validationResult = validateCommentForm(commentBody)
+    if (!validationResult.success) {
+      return res.status(200).json({
+        success: false,
+        message: validationResult.message,
+        errors: validationResult.errors
+      })
+    }
+    const commentContent = commentBody.content
+    Comment
+      .findByIdAndUpdate(commentId, {
+        $set: {
+          content: commentContent
+        }
+      }).then(editedComment => {
+        return res.status(200).json({
+          success: true,
+          message: 'Comment edited successfully.',
+          editedComment
+        })
+      }).catch(err => {
+        console.log(err)
+        res.status(200).json({
+          success: false,
+          message: '',
+          errors: '' // TODO: change message and error
+        })
+      })
   }
 }
