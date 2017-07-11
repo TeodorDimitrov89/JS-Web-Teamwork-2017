@@ -5,6 +5,13 @@ class FormHelpers {
     const value = target.value
     const state = this.state[stateField]
     state[field] = value
+    if (value === 'true' || value === 'false') {
+      let trueFalse = {
+        'true': true,
+        'false': false
+      }[value]
+      state[field] = trueFalse
+    }
     this.setState({ [stateField]: state })
   }
   static handleCheckBoxChange () {

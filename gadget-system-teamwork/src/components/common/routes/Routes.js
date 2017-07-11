@@ -10,6 +10,9 @@ import DeleteGadgetPage from '../../gadgets/DeleteGadgetPage'
 import EditGadgetPage from '../../gadgets/EditGadgetPage'
 import CreateCommentPage from '../../gadgets/CreateCommentPage'
 import AdminPanelPage from '../../users/AdminPanelPage'
+import BlockUnblockUserPage from '../../users/BlockUnblockUserPage'
+import EditUserPage from '../../users/EditUserPage'
+import DetailsUserPage from '../../users/DetailsUserPage'
 import LogoutPage from '../../users/LogoutPage'
 
 const Routes = (props) => (
@@ -24,6 +27,9 @@ const Routes = (props) => (
     <PrivateRoute path='/gadgets/edit/:id' component={EditGadgetPage} />
     <PrivateRoute path='/gadgets/delete/:id' component={DeleteGadgetPage} />
     <PrivateRoute path='/users/admin-panel' component={AdminPanelPage} />
+    <PrivateRoute path='/users/block-unblock/:id' component={BlockUnblockUserPage} />
+    <PrivateRoute path='/users/edit/:id' component={EditUserPage} />
+    <PrivateRoute path='/users/details/:id' component={DetailsUserPage} />
     <PrivateRoute path='/users/logout' component={LogoutPage} />
   </Switch>
 )

@@ -3,9 +3,6 @@ import AdminPanelForm from './AdminPanelForm'
 import userActions from '../../actions/UserActions'
 import userStore from '../../stores/UserStore'
 import {Link} from 'react-router-dom'
-import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
-// import UsersView from './UsersView'
-// import {loadAllUsers} from '../../models/user'
 
 export default class AdminPanelPage extends Component {
   constructor (props) {
@@ -25,6 +22,12 @@ export default class AdminPanelPage extends Component {
     userActions.getAllUsers()
   }
 
+  componentWillUnmount () {
+    userStore.removeListener(
+      userStore.eventTypes.USERS_FETCHED,
+      this.handleUsersFetching)
+  }
+
   handleUsersFetching (usersData) {
     this.setState({ users: usersData.users })
   }
@@ -37,17 +40,17 @@ export default class AdminPanelPage extends Component {
           <td>{user.firstName}</td>
           <td>{user.lastName}</td>
           <td className={user.isAdmin ? 'text-success' : 'text-danger'}><strong>{user.isAdmin ? 'true' : 'false'}</strong></td>
-          <td className={user.isBlocked ? 'text-suxxess' : 'text-danger'}><strong>{user.isBlocked ? 'true' : 'false'}</strong></td>
+          <td className={user.isBlocked ? 'text-danger' : 'text-success'}><strong>{user.isBlocked ? 'true' : 'false'}</strong></td>
           <td>
-            <Link to={'/detailsUser/' + user._id} className='btn btn-lg btn-primary btn-block' style={{width: '110px',
+            <Link to={'/users/details/' + user._id} className='btn btn-lg btn-primary btn-block' style={{width: '110px',
               height: '35px',
               paddingTop: '5px'}}>Details</Link>
-            <Link to={'/editUser/' + user._id} className='btn btn-lg btn-warning btn-block' style={{width: '110px',
+            <Link to={'/users/edit/' + user._id} className='btn btn-lg btn-warning btn-block' style={{width: '110px',
               height: '35px',
               paddingTop: '5px'}}>Edit user</Link>
-            <Link to={'/deleteUser/' + user._id} className='btn btn-lg btn-danger btn-block' style={{width: '110px',
+            <Link to={'/users/block-unblock/' + user._id} className={user.isBlocked ? 'btn btn-lg btn-success btn-block' : 'btn btn-lg btn-danger btn-block'} style={{width: '110px',
               height: '35px',
-              paddingTop: '5px'}}>Delete</Link>
+              paddingTop: '5px'}}>{user.isBlocked ? 'Unblock' : 'Block' }</Link>
           </td>
         </tr>
       )
@@ -59,10 +62,6 @@ export default class AdminPanelPage extends Component {
         <AdminPanelForm {...this.props}
           userRows={userRows} />
       </div>
-
-    //   <UsersView
-    //     users={this.state.users}
-    //         />
     )
   }
 }

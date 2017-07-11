@@ -19,6 +19,21 @@ class UserStore extends EventEmitter {
       .getAll()
       .then(data => this.emit(this.eventTypes.USER_FETCHED, data))
   }
+  getUser (userId) {
+    UserData
+      .getUser(userId)
+      .then(data => this.emit(this.eventTypes.SINGLE_USER_FETCHED, data.user))
+  }
+  blockUnblockUser (userId) {
+    UserData
+      .blockUnblockUser(userId)
+      .then(data => this.emit(this.eventTypes.USER_BLOCKED_UNBLOCKED, data.user))
+  }
+  editUser (user) {
+    UserData
+      .editUser(user)
+      .then(data => this.emit(this.eventTypes.USER_EDITED, data))
+  }
   handleAction (action) {
     switch (action.type) {
       case userActions.types.REGISTER_USER: {
@@ -33,6 +48,18 @@ class UserStore extends EventEmitter {
         this.getAllUsers()
         break
       }
+      case userActions.types.FETCH_SINGLE_USER: {
+        this.getUser(action.userId)
+        break
+      }
+      case userActions.types.BLOCK_UNBLOCK_USER: {
+        this.blockUnblockUser(action.userId)
+        break
+      }
+      case userActions.types.EDIT_USER: {
+        this.editUser(action.user)
+        break
+      }
       default: break
     }
   }
@@ -41,7 +68,10 @@ let userStore = new UserStore()
 userStore.eventTypes = {
   USER_REGISTERED: 'user_registered',
   USER_LOGGED_IN: 'user_logged_in',
-  USER_FETCHED: 'user_fetched'
+  USER_FETCHED: 'user_fetched',
+  SINGLE_USER_FETCHED: 'single_user_fetched',
+  USER_BLOCKED_UNBLOCKED: 'user_blocked_unblocked',
+  USER_EDITED: 'user_edited'
 }
 dispatcher.register(userStore.handleAction.bind(userStore))
 export default userStore

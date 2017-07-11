@@ -6,16 +6,21 @@ class Navbar extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      username: Auth.getUser().name
+      username: Auth.getUser().firstName
     }
     this.handleUserLoggedIn = this.handleUserLoggedIn.bind(this)
     userStore.on(userStore.eventTypes.USER_LOGGED_IN,
     this.handleUserLoggedIn)
   }
+
+  componentWillUnmount () {
+    userStore.removeListener(userStore.eventTypes.USER_LOGGED_IN,
+    this.handleUserLoggedIn)
+  }
   handleUserLoggedIn (data) {
     if (data.success) {
       this.setState({
-        username: data.user.name
+        username: Auth.getUser().firstName
       })
     }
   }
@@ -26,11 +31,11 @@ class Navbar extends React.Component {
           <div>
             <nav className='navbar navbar-toggleable-md navbar-light bg-faded'>
               <Link to='/'>Home</Link>
-              <span>{this.state.username}</span>
               <Link to='/gadgets/add'>Add Gadget</Link>
               {Auth.isUserAdmin() ? (
                 <Link to='/users/admin-panel'>Admin Panel</Link>
               ) : ''}
+              <span style={{marginLeft: '200px'}}>{this.state.username}</span>
               <Link to='/users/logout'>Logout</Link>
             </nav>
           </div>

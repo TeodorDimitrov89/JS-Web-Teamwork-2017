@@ -93,6 +93,74 @@ module.exports = {
         success: false,
         errors: err
       }))
+  },
+  getUser: (req, res) => {
+    const id = req.params.id
+    User
+      .findById(id)
+      .then(user => {
+        return res.status(200).json({
+          success: true,
+          user
+        })
+      }).catch(err => res.status(200).json({
+        success: false,
+        errors: err
+      }))
+  },
+  blockUnblockUser: (req, res) => {
+    const id = req.params.id
+    User
+      .findById(id)
+      .then(user => {
+        user.isBlocked ? user.isBlocked = false : user.isBlocked = true
+        user.save()
+        return res.status(200).json({
+          success: true,
+          user
+        })
+      }).catch(err => res.status(200).json({
+        success: false,
+        errors: err
+      }))
+  },
+  editUser: (req, res, next) => {
+    const validationResult = validateSignupForm(req.body)
+    if (!validationResult.success) {
+      return res.status(200).json({
+        success: false,
+        message: validationResult.message,
+        errors: validationResult.errors
+      })
+    }
+
+    let id = req.body._id
+    User
+      .findByIdAndUpdate(id, {
+        $set: {
+          email: req.body.email,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          isAdmin: req.body.isAdmin,
+          isBlocked: req.body.isBlocked
+        }
+      })
+      .then(user => {
+        user.save()
+        .then(() => {
+          return res.status(200).json({
+            success: true,
+            message: 'Edit successful!',
+            user
+          })
+        }).catch(err => res.status(200).json({
+          success: false,
+          errors: err
+        }))
+      }).catch(err => res.status(200).json({
+        success: false,
+        errors: err
+      }))
   }
 }
 
