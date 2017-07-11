@@ -52,6 +52,12 @@ const gadgetActions = {
       type: this.types.POST_EIDT_GADGET,
       dataEditedGadget
     })
+  },
+  search (string) {
+    dispatcher.dispatch({
+      type: this.types.SEARCH_GADGET,
+      string
+    })
   }
 }
 

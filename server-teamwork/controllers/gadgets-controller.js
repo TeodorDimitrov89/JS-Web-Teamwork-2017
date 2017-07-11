@@ -200,5 +200,17 @@ module.exports = {
         console.log(err)
         res.status(200).json(err)
       })
+  },
+  search: (req, res) => {
+    const search = req.query.search
+    let query = Gadget.find({})
+    if (search){
+      query = query.where('title').regex(new RegExp(search, 'i'))
+    }
+    query
+      .then(gadgets => {
+        return res.status(200).json(gadgets)
+      })
+      .catch(err => res.status(200).json(err))
   }
 }

@@ -25,6 +25,9 @@ class GadgetData {
   static deletePost (gadgetId) {
     return Data.post(`${baseUrl}/delete/${gadgetId}`, {}, true) // TODO: check if user is admin
   }
+  static search (string) {
+    return Data.get(`${baseUrl}/?search=${string}`)
+  }
 }
 
 export default GadgetData

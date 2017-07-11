@@ -30,4 +30,6 @@ router.get('/edit/:id', controllers.gadgets.editGet)
 
 router.post('/edit/:id', controllers.gadgets.editPost)
 
+router.get('/', controllers.gadgets.search)
+
 module.exports = router

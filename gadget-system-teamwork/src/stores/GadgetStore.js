@@ -2,6 +2,7 @@ import { EventEmitter } from 'events'
 import dispatcher from '../dispatcher/dispatcher'
 import gadgetActions from '../actions/GadgetActions'
 import GadgetData from '../data/GadgetData'
+
 class GadgetStore extends EventEmitter {
   create (gadget) {
     GadgetData
@@ -21,9 +22,9 @@ class GadgetStore extends EventEmitter {
   details (gadgetId) {
     GadgetData
       .details(gadgetId)
-       .then(data => {
-         this.emit(this.eventTypes.GADGET_DETAILS, data)
-       })
+      .then(data => {
+        this.emit(this.eventTypes.GADGET_DETAILS, data)
+      })
   }
   getEditForm (gadgetId) {
     GadgetData
@@ -53,6 +54,14 @@ class GadgetStore extends EventEmitter {
         this.emit(this.eventTypes.DELETE_GADGET, deleteGadget)
       })
   }
+  searchGadget (string) {
+    GadgetData
+      .search(string)
+      .then(searchedGadgets => {
+        this.emit(this.eventTypes.SEARCH_GADGET, searchedGadgets)
+      })
+  }
+
   handleAction (action) {
     switch (action.type) {
       case gadgetActions.types.CREATE_GADGET: {
@@ -83,6 +92,10 @@ class GadgetStore extends EventEmitter {
         this.deleteGadget(action.gadgetId)
         break
       }
+      case gadgetActions.types.SEARCH_GADGET: {
+        this.searchGadget(action.string)
+        break
+      }
       default: break
     }
   }
@@ -91,10 +104,12 @@ let gadgetStore = new GadgetStore()
 gadgetStore.eventTypes = {
   GADGET_CREATED: 'gadget_created',
   GADGET_FETCHED: 'gadget_fetched',
+  GADGET_DETAILS: 'gadget_details',
   EDIT_GADGET_FETCH: 'edit_gadget_fetched',
   GADGET_EDITED: 'gadget_edited',
   DELETE_GADGET_FETCHED: 'delete_gadget_fetched',
-  DELETE_GADGET: 'delete_gadget'
+  DELETE_GADGET: 'delete_gadget',
+  SEARCH_GADGET: 'search_gadget'
 }
 dispatcher.register(gadgetStore.handleAction.bind(gadgetStore))
 export default gadgetStore

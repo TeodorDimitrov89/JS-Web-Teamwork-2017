@@ -1,10 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import queryString from 'query-string'
 import gadgetActions from '../../actions/GadgetActions'
 import gadgetStore from '../../stores/GadgetStore'
+import Search from '../common/Search'
+
 class ListGadgetsPage extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     const query = queryString.parse(this.props.location.search)
     const page = parseInt(query.page, 10) || 1
@@ -14,24 +16,39 @@ class ListGadgetsPage extends React.Component {
     }
 
     this.handleGadgetsFetching = this.handleGadgetsFetching.bind(this)
+    this.handleSearchGadgets = this.handleSearchGadgets.bind(this)
     this.goToPrevPage = this.goToPrevPage.bind(this)
     this.goToNextPage = this.goToNextPage.bind(this)
 
     gadgetStore.on(
       gadgetStore.eventTypes.GADGET_FETCHED,
       this.handleGadgetsFetching)
+
+    gadgetStore.on(
+      gadgetStore.eventTypes.SEARCH_GADGET,
+      this.handleSearchGadgets)
   }
-  componentDidMount () {
+
+  componentDidMount() {
     gadgetActions.all(this.state.page)
   }
-  componentWillUnmount () {
+
+  componentWillUnmount() {
     gadgetStore.removeListener(gadgetStore.eventTypes.GADGET_FETCHED,
-    this.handleGadgetsFetching)
+      this.handleGadgetsFetching)
+    gadgetStore.removeListener(gadgetStore.eventTypes.SEARCH_GADGET,
+      this.handleSearchGadgets)
   }
-  handleGadgetsFetching (data) {
+
+  handleGadgetsFetching(data) {
     this.setState({gadgets: data})
   }
-  goToPrevPage () {
+
+  handleSearchGadgets(data) {
+    this.setState({gadgets: data})
+  }
+
+  goToPrevPage() {
     let page = this.state.page
     if (page === 1) {
       return
@@ -43,7 +60,8 @@ class ListGadgetsPage extends React.Component {
     this.props.history.push(`?page=${page}`)
     gadgetActions.all(page)
   }
-  goToNextPage () {
+
+  goToNextPage() {
     if (this.state.gadgets.length === 0) {
       return
     }
@@ -56,7 +74,7 @@ class ListGadgetsPage extends React.Component {
     gadgetActions.all(page)
   }
 
-  render () {
+  render() {
     let gadgets = 'No gadgets available'
     if (this.state.gadgets.length > 0) {
       gadgets = this.state.gadgets.map(gadget => {
@@ -64,7 +82,7 @@ class ListGadgetsPage extends React.Component {
           <div className='allGadgets' key={gadget._id}>
             <h2><strong>Title: </strong>{gadget.title}</h2>
             <p><strong>Description: </strong>{gadget.description}</p>
-            <img src={`${gadget.image}`} alt={`${gadget.title}`} />
+            <img src={`${gadget.image}`} alt={`${gadget.title}`}/>
             <p><strong>Quantity on stock: </strong>{gadget.quantityOnStock}</p>
             <Link to={`/gadgets/delete/${gadget._id}`}>Delete</Link>
             <Link to={`/gadgets/edit/${gadget._id}`}>Edit</Link>
@@ -77,14 +95,15 @@ class ListGadgetsPage extends React.Component {
     return (
       <div>
         <h1>All Gadgets</h1>
+        <Search {...this.props}/>
         {gadgets}
         <div>
           <button className='btn btn-primary' onClick={this.goToPrevPage}>Prev</button>
           {this.state.gadgets.length > 0 ? (
             <button className='btn btn-primary' onClick={this.goToNextPage}>Next</button>
-    ) : (
-      <button className='btn btn-primary disabled' onClick={this.goToNextPage}>Next</button>
-    )}
+          ) : (
+            <button className='btn btn-primary disabled' onClick={this.goToNextPage}>Next</button>
+          )}
         </div>
       </div>
     )
