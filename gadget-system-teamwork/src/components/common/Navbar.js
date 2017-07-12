@@ -24,23 +24,23 @@ class Navbar extends React.Component {
       })
     }
   }
-  render() {
+  render () {
     return (
       <div className='menu'>
         {Auth.isUserAuthenticated() ? (
           <nav className='navbar navbar-default'>
-            <div className="container-fluid">
-              <Link className="navbar-brand" to='/'>Home</Link>
-              <Link className="navbar-brand" to='/gadgets/all'>All Gadgets</Link>
+            <div className='container-fluid'>
+              <Link className='navbar-brand' to='/'>Home</Link>
+              <Link className='navbar-brand' to='/gadgets/all'>All Gadgets</Link>
               {Auth.isUserAdmin() ? (
                 <div>
-                  <Link className="navbar-brand" to='/gadgets/add'>Add Gadget</Link>
-                  <Link className = "navbar-brand" to='/users/admin-panel'>Admin Panel</Link>
+                  <Link className='navbar-brand' to='/gadgets/add'>Add Gadget</Link>
+                  <Link className ='navbar-brand' to='/users/admin-panel'>Admin Panel</Link>
                 </div>
                 ) : ''}
-              <div className="right">
-                <Link className="navbar-brand right" to='/users/logout'>Logout</Link>
-                <span className="navbar-brand right">Hello, {this.state.username}</span>
+              <div className='right'>
+                <Link className='navbar-brand right' to='/users/logout'>Logout</Link>
+                <span className='navbar-brand right'>Hello, {this.state.username}</span>
               </div>
             </div>
           </nav>
@@ -48,12 +48,12 @@ class Navbar extends React.Component {
         ) : (
 
           <nav className='navbar navbar-default'>
-            <div className="container-fluid">
-              <Link className="navbar-brand" to='/'>Home</Link>
-              <Link className="navbar-brand" to='/gadgets/all'>All Gadgets</Link>
-              <div className="right">
-                <Link className="navbar-brand" to='/users/register'>Register</Link>
-                <Link className="navbar-brand" to='/users/login'>Login</Link>
+            <div className='container-fluid'>
+              <Link className='navbar-brand' to='/'>Home</Link>
+              <Link className='navbar-brand' to='/gadgets/all'>All Gadgets</Link>
+              <div className='right'>
+                <Link className='navbar-brand' to='/users/register'>Register</Link>
+                <Link className='navbar-brand' to='/users/login'>Login</Link>
               </div>
             </div>
           </nav>

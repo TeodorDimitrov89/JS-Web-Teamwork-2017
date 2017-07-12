@@ -51,6 +51,10 @@ img {
   border-radius: 10px;
   padding: 10px;
 }
+.homeGadgets > div a {
+  display: inline-block;
+  margin-left: 5px;
+}
 
 .homeGadgets img {
   width: 350px;
