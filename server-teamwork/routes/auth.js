@@ -10,5 +10,6 @@ router.get('/all', authCheck.isAuthenticated, authCheck.isAdmin(), controllers.u
 router.get('/:id', authCheck.isAuthenticated, authCheck.isAdmin(), controllers.users.getUser)
 router.post('/block/:id', authCheck.isAuthenticated, authCheck.isAdmin(), controllers.users.blockUnblockUser)
 router.post('/edit', authCheck.isAuthenticated, authCheck.isAdmin(), controllers.users.editUser)
+router.get('/findGadgetsBought/:id', authCheck.isAuthenticated, controllers.users.findGadgetsBought)
 
 module.exports = router

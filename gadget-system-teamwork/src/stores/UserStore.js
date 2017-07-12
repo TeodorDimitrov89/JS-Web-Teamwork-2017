@@ -34,6 +34,10 @@ class UserStore extends EventEmitter {
       .editUser(user)
       .then(data => this.emit(this.eventTypes.USER_EDITED, data))
   }
+  getGadgetsBought (userId) {
+    Promise.all(UserData.getGadgetsBought(userId))
+      .then(data => this.emit(this.eventTypes.GADGETS_BOUGHT_FETCHED, data))
+  }
   handleAction (action) {
     switch (action.type) {
       case userActions.types.REGISTER_USER: {
@@ -60,6 +64,10 @@ class UserStore extends EventEmitter {
         this.editUser(action.user)
         break
       }
+      case userActions.types.FETCH_GADGETS_BOUGHT: {
+        this.getGadgetsBought(action.userId)
+        break
+      }
       default: break
     }
   }
@@ -71,7 +79,8 @@ userStore.eventTypes = {
   USER_FETCHED: 'user_fetched',
   SINGLE_USER_FETCHED: 'single_user_fetched',
   USER_BLOCKED_UNBLOCKED: 'user_blocked_unblocked',
-  USER_EDITED: 'user_edited'
+  USER_EDITED: 'user_edited',
+  GADGETS_BOUGHT_FETCHED: 'gadgets_bought_fetched'
 }
 dispatcher.register(userStore.handleAction.bind(userStore))
 export default userStore

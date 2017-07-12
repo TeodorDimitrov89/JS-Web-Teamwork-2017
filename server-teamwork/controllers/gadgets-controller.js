@@ -258,33 +258,5 @@ module.exports = {
         console.log(err)
         res.status(200).json(err)
       })
-  },
-  findGadgetsBought: (req, res) => {
-    let idReqUser = req.params.id
-
-    Gadget
-     .find({buyerUsers: idReqUser})
-     .then(gadgets => {
-       if (gadgets.length < 1) {
-         return res.status(200).json({
-           success: false,
-           message: 'No gadget purchased by current user found!'
-         })
-       }
-       let qtyBoughtGadgets = {}
-       for (let gadget of gadgets) {
-         let searchedIndex = gadget.buyerUsers.indexOf(idReqUser)
-         let totalPrice = gadget.quantityBought[searchedIndex] * gadget.price
-         let userQuantityBought = gadget.quantityBought[searchedIndex]
-         qtyBoughtGadgets[gadget.title] = [userQuantityBought, totalPrice]
-       }
-       return res.status(200).json({
-         success: true,
-         qtyBoughtGadgets
-       })
-     }).catch(err => {
-       console.log(err)
-       res.status(200).json(err)
-     })
   }
 }

@@ -7,7 +7,8 @@ const userActions = {
     FETCH_USERS: 'FETCH_USERS',
     FETCH_SINGLE_USER: 'FETCH_SINGLE_USER',
     BLOCK_UNBLOCK_USER: 'BLOCK_UNBLOCK_USER',
-    EDIT_USER: 'EDIT_USER'
+    EDIT_USER: 'EDIT_USER',
+    FETCH_GADGETS_BOUGHT: 'FETCH_GADGETS_BOUGHT'
   },
   register (user) {
     dispatcher.dispatch({
@@ -29,6 +30,12 @@ const userActions = {
   getUser (userId) {
     dispatcher.dispatch({
       type: this.types.FETCH_SINGLE_USER,
+      userId
+    })
+  },
+  getGadgetsBought (userId) {
+    dispatcher.dispatch({
+      type: this.types.FETCH_GADGETS_BOUGHT,
       userId
     })
   },

@@ -24,7 +24,7 @@ export default class AdminPanelPage extends Component {
 
   componentWillUnmount () {
     userStore.removeListener(
-      userStore.eventTypes.USERS_FETCHED,
+      userStore.eventTypes.USER_FETCHED,
       this.handleUsersFetching)
   }
 
@@ -39,6 +39,7 @@ export default class AdminPanelPage extends Component {
           <td>{user.email}</td>
           <td>{user.firstName}</td>
           <td>{user.lastName}</td>
+          <td><Link to={`/users/bought-products/${user._id}`}>Products bought info</Link></td>
           <td className={user.isAdmin ? 'text-success' : 'text-danger'}><strong>{user.isAdmin ? 'true' : 'false'}</strong></td>
           <td className={user.isBlocked ? 'text-danger' : 'text-success'}><strong>{user.isBlocked ? 'true' : 'false'}</strong></td>
           <td>
@@ -56,6 +57,7 @@ export default class AdminPanelPage extends Component {
       )
     })
 
+    console.log(userRows)
     return (
       <div>
         <h1>Admin Panel</h1>

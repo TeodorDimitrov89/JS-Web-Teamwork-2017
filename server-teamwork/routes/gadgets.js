@@ -20,8 +20,6 @@ router.get('/details/edit/comment/:id', controllers.comments.editGet)
 router.post('/details/edit/comment/:id', controllers.comments.editPost)
 
 // Gadget Routes
-router.get('/findGadgetsBought/:id', authCheck.isAuthenticated, controllers.gadgets.findGadgetsBought)
-
 router.post('/buy/:id', authCheck.isAuthenticated, controllers.gadgets.buyGadget)
 
 router.get('/details/:id', authCheck.isAuthenticated, controllers.gadgets.getDetails)

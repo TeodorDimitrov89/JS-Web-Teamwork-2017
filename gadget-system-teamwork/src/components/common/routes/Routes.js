@@ -12,6 +12,7 @@ import CreateCommentPage from '../../gadgets/CreateCommentPage'
 import DeleteCommentPage from '../../gadgets/DeleteCommentPage'
 import EditCommentPage from '../../gadgets/EditCommentPage'
 import AdminPanelPage from '../../users/AdminPanelPage'
+import UserProfilePage from '../../users/UserProfilePage'
 import BlockUnblockUserPage from '../../users/BlockUnblockUserPage'
 import EditUserPage from '../../users/EditUserPage'
 import DetailsUserPage from '../../users/DetailsUserPage'
@@ -22,18 +23,19 @@ const Routes = (props) => (
     <Route path='/' exact component={ListGadgetsPage} />
     <Route path='/users/register' component={RegisterPage} />
     <Route path='/users/login' component={LoginPage} />
-    <PrivateRoute path='/gadgets/add' component={CreateGadgetPage} />
-    <PrivateRoute path='/gadgets/details/:id/comments/create/:title' component={CreateCommentPage} />
-    <PrivateRoute path='/gadgets/details/delete/comment/:id' component={DeleteCommentPage} />
-    <PrivateRoute path='/gadgets/details/edit/comment/:id' component={EditCommentPage} />
-    <PrivateRoute path='/gadgets/details/:id' component={GadgetDetailsPage} />
-    <PrivateRoute path='/gadgets/edit/:id' component={EditGadgetPage} />
-    <PrivateRoute path='/gadgets/delete/:id' component={DeleteGadgetPage} />
-    <PrivateRoute path='/users/admin-panel' component={AdminPanelPage} />
-    <PrivateRoute path='/users/block-unblock/:id' component={BlockUnblockUserPage} />
-    <PrivateRoute path='/users/edit/:id' component={EditUserPage} />
-    <PrivateRoute path='/users/details/:id' component={DetailsUserPage} />
-    <PrivateRoute path='/users/logout' component={LogoutPage} />
+    <PrivateRoute path='/gadgets/add' exact component={CreateGadgetPage} />
+    <PrivateRoute path='/gadgets/details/:id/comments/create/:title' exact component={CreateCommentPage} />
+    <PrivateRoute path='/gadgets/details/delete/comment/:id' exact component={DeleteCommentPage} />
+    <PrivateRoute path='/gadgets/details/edit/comment/:id' exact component={EditCommentPage} />
+    <PrivateRoute path='/gadgets/details/:id' exact component={GadgetDetailsPage} />
+    <PrivateRoute path='/gadgets/edit/:id' exact component={EditGadgetPage} />
+    <PrivateRoute path='/gadgets/delete/:id' exact component={DeleteGadgetPage} />
+    <PrivateRoute path='/users/admin-panel' exact component={AdminPanelPage} />
+    <PrivateRoute path='/users/bought-products/:id' exact component={UserProfilePage} />
+    <PrivateRoute path='/users/block-unblock/:id' exact component={BlockUnblockUserPage} />
+    <PrivateRoute path='/users/edit/:id' exact component={EditUserPage} />
+    <PrivateRoute path='/users/details/:id' exact component={DetailsUserPage} />
+    <PrivateRoute path='/users/logout' exact component={LogoutPage} />
   </Switch>
 )
 

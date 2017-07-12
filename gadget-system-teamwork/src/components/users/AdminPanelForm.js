@@ -13,6 +13,7 @@ export default class AdminPanelForm extends Component {
                 <th>User email</th>
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>Products bought</th>
                 <th>Is Admin</th>
                 <th>Is Blocked</th>
                 <th>Actions</th>
