@@ -4,7 +4,7 @@ import queryString from 'query-string'
 import gadgetActions from '../../actions/GadgetActions'
 import gadgetStore from '../../stores/GadgetStore'
 import Search from '../common/Search'
-
+import Auth from '../users/Auth'
 class ListGadgetsPage extends React.Component {
   constructor (props) {
     super(props)
@@ -85,10 +85,19 @@ class ListGadgetsPage extends React.Component {
             <img src={`${gadget.image}`} alt={`${gadget.title}`} />
             <p><strong>Quantity on stock: </strong>{gadget.quantityOnStock}</p>
             <p><strong>Single price: </strong>{gadget.price} USD</p>
-            <Link to={`/gadgets/delete/${gadget._id}`}>Delete</Link>
-            <Link to={`/gadgets/edit/${gadget._id}`}>Edit</Link>
-            <Link to={`/gadgets/details/${gadget._id}`}>Details</Link>
-            <Link to={`/gadgets/details/${gadget._id}/buy`}><span style={{color: 'green'}}><b>BUY</b></span></Link>
+            {(Auth.isUserAuthenticated() && Auth.isUserAdmin()) ? (
+              <div>
+                <Link to={`/gadgets/edit/${gadget._id}`}>Edit</Link>
+                <Link to={`/gadgets/delete/${gadget._id}`}>Delete</Link>
+                <Link to={`/gadgets/details/${gadget._id}`}>Details</Link>
+                <Link to={`/gadgets/details/${gadget._id}/buy`}><span style={{color: 'green'}}><b>BUY</b></span></Link>
+              </div>
+              ) : Auth.isUserAuthenticated() ? (
+                <div>
+                  <Link to={`/gadgets/details/${gadget._id}`}>Details</Link>
+                  <Link to={`/gadgets/details/${gadget._id}/buy`}><span style={{color: 'green'}}><b>BUY</b></span></Link>
+                </div>
+              ) : ''}
           </div>
         )
       })

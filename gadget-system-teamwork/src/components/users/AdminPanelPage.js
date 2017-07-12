@@ -3,7 +3,7 @@ import AdminPanelForm from './AdminPanelForm'
 import userActions from '../../actions/UserActions'
 import userStore from '../../stores/UserStore'
 import {Link} from 'react-router-dom'
-
+import Auth from './Auth'
 export default class AdminPanelPage extends Component {
   constructor (props) {
     super(props)
@@ -19,6 +19,11 @@ export default class AdminPanelPage extends Component {
   }
 
   componentDidMount () {
+    if (((this.props.location.pathname === '/users/admin-panel' &&
+      !Auth.getUser('user').isAdmin))) {
+      this.props.history.push('/users/login')
+      return
+    }
     userActions.getAllUsers()
   }
 

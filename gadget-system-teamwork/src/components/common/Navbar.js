@@ -20,7 +20,7 @@ class Navbar extends React.Component {
   handleUserLoggedIn (data) {
     if (data.success) {
       this.setState({
-        username: Auth.getUser().firstName
+        username: data.user.firstName
       })
     }
   }
@@ -31,9 +31,11 @@ class Navbar extends React.Component {
           <div>
             <nav className='navbar navbar-toggleable-md navbar-light bg-faded'>
               <Link to='/'>Home</Link>
-              <Link to='/gadgets/add'>Add Gadget</Link>
               {Auth.isUserAdmin() ? (
-                <Link to='/users/admin-panel'>Admin Panel</Link>
+                <span>
+                  <Link to='/gadgets/add'>Add Gadget</Link>
+                  <Link to='/users/admin-panel'>Admin Panel</Link>
+                </span>
               ) : ''}
               <span style={{marginLeft: '200px'}}>{this.state.username}</span>
               <Link to='/users/logout'>Logout</Link>

@@ -5,7 +5,7 @@ import FormHelpers from '../common/forms/FormHelpers'
 import gadgetActions from '../../actions/GadgetActions'
 import gadgetStore from '../../stores/GadgetStore'
 import toastr from 'toastr'
-
+import Auth from '../users/Auth'
 class CreateGadgetPage extends React.Component {
   constructor (props) {
     super(props)
@@ -29,7 +29,12 @@ class CreateGadgetPage extends React.Component {
       this.handleGadgetCreation
     )
   }
-
+  componentDidMount () {
+    if (this.props.location.pathname === '/gadgets/add' && !Auth.getUser('user').isAdmin) {
+      toastr.error('You are not authorized to create gadgets.')
+      this.props.history.push('/users/login')
+    }
+  }
   componentWillUnmount () {
     gadgetStore.removeListener(
     gadgetStore.eventTypes.GADGET_CREATED,
