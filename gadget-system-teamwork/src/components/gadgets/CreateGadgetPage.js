@@ -11,11 +11,11 @@ class CreateGadgetPage extends React.Component {
     super(props)
     this.state = {
       gadget: {
-        title: 'Pesho',
-        description: 'Some whatever description',
-        image: 'https://static.pexels.com/photos/126407/pexels-photo-126407.jpeg',
-        quantityOnStock: 15,
-        price: 2
+        title: '',
+        description: '',
+        image: '',
+        quantityOnStock: '',
+        price: ''
       },
       error: ''
     }
@@ -72,7 +72,7 @@ class CreateGadgetPage extends React.Component {
   render () {
     return (
       <div>
-        <h1>Create Gadget Page</h1>
+        <h1>Create Gadget</h1>
         <CreateGadgetForm
           gadget={this.state.gadget}
           error={this.state.error}

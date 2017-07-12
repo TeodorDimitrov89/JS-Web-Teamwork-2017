@@ -60,7 +60,7 @@ class LoginPage extends React.Component {
   render () {
     return (
       <div>
-        Login Page
+        <h1>Login</h1>
         <LoginForm
           user={this.state.user}
           error={this.state.error}

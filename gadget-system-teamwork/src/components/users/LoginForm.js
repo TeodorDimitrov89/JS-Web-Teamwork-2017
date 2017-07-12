@@ -17,7 +17,7 @@ const LoginForm = (props) => (
         value={props.user.password}
         placeholder='Password'
         onChange={props.onChange} />
-      <input type='submit' value='login' onClick={props.onSave} />
+      <input className='btn btn-primary' type='submit' value='login' onClick={props.onSave} />
       <br />
     </form>
   </div>

@@ -82,7 +82,7 @@ class GadgetDetails extends React.Component {
     }
 
     return (
-      <div>
+      <div className="details">
         <h1>{gadget.title}</h1>
         <img src={gadget.image} alt={gadget.title} />
         <p>{gadget.description}</p>

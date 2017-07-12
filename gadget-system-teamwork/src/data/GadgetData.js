@@ -26,7 +26,7 @@ class GadgetData {
     return Data.post(`${baseUrl}/delete/${gadgetId}`, {}, true) // TODO: check if user is admin
   }
   static search (string) {
-    return Data.get(`${baseUrl}/?search=${string}`)
+    return Data.get(`${baseUrl}/search?search=${string}`)
   }
   static buyGadget (gadgetId) {
     return Data.post(`${baseUrl}/buy/${gadgetId}`, {gadgetId: gadgetId}, true)

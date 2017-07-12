@@ -11,8 +11,8 @@ class CreateCommentPage extends React.Component {
     super(props)
     this.state = {
       comment: {
-        content: 'Whatever comment',
-        author: 'Some user',
+        content: '',
+        author: '',
         createdOn: ''
       },
       error: ''

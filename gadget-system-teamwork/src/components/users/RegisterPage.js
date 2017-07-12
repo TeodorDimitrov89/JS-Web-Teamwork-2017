@@ -10,11 +10,11 @@ class RegisterPage extends React.Component { // Smart Component
     super(props)
     this.state = {
       user: {
-        email: 'test@test.bg',
-        password: 'test',
-        confirmPassword: 'test',
-        firstName: 'test',
-        lastName: 'testerski'
+        email: '',
+        password: '',
+        confirmPassword: '',
+        firstName: '',
+        lastName: ''
       },
       error: ''
     }
@@ -64,7 +64,7 @@ class RegisterPage extends React.Component { // Smart Component
   render () {
     return (
       <div>
-        Register User
+        <h1>Register User</h1>
         <RegisterForm
           user={this.state.user}
           error={this.state.error}

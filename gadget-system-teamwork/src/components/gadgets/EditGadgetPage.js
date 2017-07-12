@@ -62,7 +62,7 @@ class EditGadgetPage extends React.Component {
   render () {
     return (
       <div>
-        <h1>Edit Gadget page</h1>
+        <h1>Edit Gadget</h1>
         <EditGadgetForm
           gadget={this.state.gadget}
           error={this.state.error}

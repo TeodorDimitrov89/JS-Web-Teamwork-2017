@@ -7,35 +7,10 @@ textarea { resize: none; }
 .center {
   margin-left: 50px;
 }
-.comments {
-  width: 300px;
-  margin: 0 auto;
-}
-.comment-box {
-  border-radius: 40px;
-  border: 1px solid black;
-  background: #ddd;
-  /*width: 30%;*/
-  word-wrap: break-word;
-  margin:  0 auto;
-  padding: 10px;
-  text-align: center;
-  margin: 10px;
-}
-.comment-count {
-  padding-right: 10px;
-  font-weight: bold;
-}
-.btn.btn-sm.btn-danger.btn-block,
-.btn.btn-sm.btn-info.btn-block {
-  width: 100px;
-  margin: 12px auto;
-  margin-left: 10px;
-  display: inline-block;
-  border-radius: 10px;
-}
+
 .App {
   text-align: center;
+  background: #9cb8b3;
 }
 .App-header {
   background-color: #222;
@@ -52,4 +27,54 @@ textarea { resize: none; }
 }
 img {
   width: 200px;
+}
+.navbar-brand {
+  margin-left: 5px!important;
+}
+
+.right {
+  margin-left: 70%;
+}
+
+.allGadgets {
+  margin: 10px auto;
+  width: 60%;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.homeGadgets {
+  width: 60%;
+  background: white;
+  margin: 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.homeGadgets img {
+  width: 350px;
+  height: 400px;
+}
+
+.homeLink {
+  margin: 0 5px;
+}
+
+.paging {
+  margin-bottom: 20px;
+}
+
+.details {
+  margin: 0 auto;
+  width: 60%;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+.title {
+  height: 400px;
+}
+.flex {
+  display: flex;
 }

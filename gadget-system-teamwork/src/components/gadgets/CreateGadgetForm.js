@@ -1,5 +1,6 @@
 import React from 'react'
 import Input from '../common/forms/Input'
+import TextArea from '../common/forms/TextArea'
 
 const CreateGadgetForm = (props) => (
   <div className='container'>
@@ -11,7 +12,7 @@ const CreateGadgetForm = (props) => (
         value={props.gadget.title}
         onChange={props.onChange} />
       <br />
-      <Input
+      <TextArea
         name='description'
         placeholder='Description'
         value={props.gadget.description}
