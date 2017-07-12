@@ -212,7 +212,7 @@ module.exports = {
         return res.status(200).json(gadgets)
       })
       .catch(err => res.status(200).json(err))
-  }
+  },
   buyGadget: (req, res) => {
     let idReqUser = req.user._id
     let idGadgetBought = req.body.gadgetId
