@@ -23,6 +23,7 @@ const Routes = (props) => (
     <Route path='/' exact component={ListGadgetsPage} />
     <Route path='/users/register' component={RegisterPage} />
     <Route path='/users/login' component={LoginPage} />
+    <PrivateRoute path='/gadgets/details/:id/buy' exact component={GadgetDetailsPage} />
     <PrivateRoute path='/gadgets/add' exact component={CreateGadgetPage} />
     <PrivateRoute path='/gadgets/details/:id/comments/create/:title' exact component={CreateCommentPage} />
     <PrivateRoute path='/gadgets/details/delete/comment/:id' exact component={DeleteCommentPage} />
