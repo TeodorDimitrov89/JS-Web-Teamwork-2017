@@ -204,7 +204,7 @@ module.exports = {
   search: (req, res) => {
     const search = req.query.search
     let query = Gadget.find({})
-    if (search){
+    if (search) {
       query = query.where('title').regex(new RegExp(search, 'i'))
     }
     query
@@ -219,6 +219,12 @@ module.exports = {
     Gadget
       .findById(idGadgetBought)
       .then(gadget => {
+        if (gadget === null) {
+          return res.status(200).json({
+            success: false,
+            message: 'No gadget purchased by the current user found!'
+          })
+        }
         if (gadget.quantityOnStock > 0) {
           let isBoughtIndex = gadget.buyerUsers.indexOf(idReqUser)
 
