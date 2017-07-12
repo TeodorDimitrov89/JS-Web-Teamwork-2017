@@ -219,12 +219,6 @@ module.exports = {
     Gadget
       .findById(idGadgetBought)
       .then(gadget => {
-        if (gadget === null) {
-          return res.status(200).json({
-            success: false,
-            message: 'No gadget purchased by the current user found!'
-          })
-        }
         if (gadget.quantityOnStock > 0) {
           let isBoughtIndex = gadget.buyerUsers.indexOf(idReqUser)
 
@@ -271,6 +265,12 @@ module.exports = {
     Gadget
      .find({buyerUsers: idReqUser})
      .then(gadgets => {
+       if (gadgets.length < 1) {
+         return res.status(200).json({
+           success: false,
+           message: 'No gadget purchased by current user found!'
+         })
+       }
        let qtyBoughtGadgets = {}
        for (let gadget of gadgets) {
          let searchedIndex = gadget.buyerUsers.indexOf(idReqUser)
