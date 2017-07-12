@@ -213,4 +213,72 @@ module.exports = {
       })
       .catch(err => res.status(200).json(err))
   }
+  buyGadget: (req, res) => {
+    let idReqUser = req.user._id
+    let idGadgetBought = req.body.gadgetId
+    Gadget
+      .findById(idGadgetBought)
+      .then(gadget => {
+        if (gadget.quantityOnStock > 0) {
+          let isBoughtIndex = gadget.buyerUsers.indexOf(idReqUser)
+
+          // Check if current user already bought this gadget before
+          if (isBoughtIndex > -1) {
+            let quantityBoughtByUser = gadget.quantityBought[isBoughtIndex]
+            gadget.quantityBought[isBoughtIndex] = ++quantityBoughtByUser
+          } else {
+            gadget.buyerUsers.push(idReqUser.toString())
+            gadget.quantityBought.push(1)
+          }
+          Gadget.update(
+          {_id: idGadgetBought},
+            {$set: {
+              buyerUsers: gadget.buyerUsers,
+              quantityBought: gadget.quantityBought,
+              quantityOnStock: --gadget.quantityOnStock,
+              quantitySold: ++gadget.quantitySold
+            }}
+        )
+          .then(() => {
+            return res.status(200).json({
+              success: true,
+              message: 'Gadget bought successfuly.'
+            })
+          }).catch(err => {
+            console.log(err)
+            res.status(200).json(err)
+          })
+        } else {
+          return res.status(200).json({
+            success: false,
+            message: 'Thre are no available quantities on stock for this article at the moment.'
+          })
+        }
+      }).catch(err => {
+        console.log(err)
+        res.status(200).json(err)
+      })
+  },
+  findGadgetsBought: (req, res) => {
+    let idReqUser = req.params.id
+
+    Gadget
+     .find({buyerUsers: idReqUser})
+     .then(gadgets => {
+       let qtyBoughtGadgets = {}
+       for (let gadget of gadgets) {
+         let searchedIndex = gadget.buyerUsers.indexOf(idReqUser)
+         let totalPrice = gadget.quantityBought[searchedIndex] * gadget.price
+         let userQuantityBought = gadget.quantityBought[searchedIndex]
+         qtyBoughtGadgets[gadget.title] = [userQuantityBought, totalPrice]
+       }
+       return res.status(200).json({
+         success: true,
+         qtyBoughtGadgets
+       })
+     }).catch(err => {
+       console.log(err)
+       res.status(200).json(err)
+     })
+  }
 }

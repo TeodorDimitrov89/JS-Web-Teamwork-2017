@@ -8,7 +8,8 @@ const gadgetActions = {
     FETCH_EDIT_GADGET: 'FETCH_EDIT_GADGET',
     POST_EIDT_GADGET: 'POST_EIDT_GADGET',
     FETCH_DELETE_GADGET: 'FETCH_DELETE_GADGET',
-    POST_DELETE_GADGET: 'POST_DELETE_GADGET'
+    POST_DELETE_GADGET: 'POST_DELETE_GADGET',
+    BUY_GADGET: 'BUY_GADGET'
   },
   create (gadget) {
     dispatcher.dispatch({
@@ -57,6 +58,12 @@ const gadgetActions = {
     dispatcher.dispatch({
       type: this.types.SEARCH_GADGET,
       string
+    })
+  },
+  buyGadget (gadgetId) {
+    dispatcher.dispatch({
+      type: this.types.BUY_GADGET,
+      gadgetId
     })
   }
 }

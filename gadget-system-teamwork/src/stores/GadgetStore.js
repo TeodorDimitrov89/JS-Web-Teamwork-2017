@@ -61,6 +61,11 @@ class GadgetStore extends EventEmitter {
         this.emit(this.eventTypes.SEARCH_GADGET, searchedGadgets)
       })
   }
+  buyGadget (gadgetId) {
+    GadgetData
+      .buyGadget(gadgetId)
+      .then(data => this.emit(this.eventTypes.GADGET_BOUGHT, data))
+  }
 
   handleAction (action) {
     switch (action.type) {
@@ -96,6 +101,10 @@ class GadgetStore extends EventEmitter {
         this.searchGadget(action.string)
         break
       }
+      case gadgetActions.types.BUY_GADGET: {
+        this.buyGadget(action.gadgetId)
+        break
+      }
       default: break
     }
   }
@@ -109,7 +118,8 @@ gadgetStore.eventTypes = {
   GADGET_EDITED: 'gadget_edited',
   DELETE_GADGET_FETCHED: 'delete_gadget_fetched',
   DELETE_GADGET: 'delete_gadget',
-  SEARCH_GADGET: 'search_gadget'
+  SEARCH_GADGET: 'search_gadget',
+  GADGET_BOUGHT: 'gadget_bought'
 }
 dispatcher.register(gadgetStore.handleAction.bind(gadgetStore))
 export default gadgetStore

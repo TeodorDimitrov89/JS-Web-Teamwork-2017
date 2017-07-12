@@ -28,6 +28,9 @@ class GadgetData {
   static search (string) {
     return Data.get(`${baseUrl}/?search=${string}`)
   }
+  static buyGadget (gadgetId) {
+    return Data.post(`${baseUrl}/buy/${gadgetId}`, {gadgetId: gadgetId}, true)
+  }
 }
 
 export default GadgetData
