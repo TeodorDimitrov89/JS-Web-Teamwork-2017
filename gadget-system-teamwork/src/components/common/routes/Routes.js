@@ -9,6 +9,8 @@ import GadgetDetailsPage from '../../gadgets/GadgetDetails'
 import DeleteGadgetPage from '../../gadgets/DeleteGadgetPage'
 import EditGadgetPage from '../../gadgets/EditGadgetPage'
 import CreateCommentPage from '../../gadgets/CreateCommentPage'
+import DeleteCommentPage from '../../gadgets/DeleteCommentPage'
+import EditCommentPage from '../../gadgets/EditCommentPage'
 import AdminPanelPage from '../../users/AdminPanelPage'
 import BlockUnblockUserPage from '../../users/BlockUnblockUserPage'
 import EditUserPage from '../../users/EditUserPage'
@@ -21,8 +23,9 @@ const Routes = (props) => (
     <Route path='/users/register' component={RegisterPage} />
     <Route path='/users/login' component={LoginPage} />
     <PrivateRoute path='/gadgets/add' component={CreateGadgetPage} />
-    {/* <PrivateRoute path='/gadgets/details/:id/comments/create' component={CreateCommentPage} /> */}
     <PrivateRoute path='/gadgets/details/:id/comments/create/:title' component={CreateCommentPage} />
+    <PrivateRoute path='/gadgets/details/delete/comment/:id' component={DeleteCommentPage} />
+    <PrivateRoute path='/gadgets/details/edit/comment/:id' component={EditCommentPage} />
     <PrivateRoute path='/gadgets/details/:id' component={GadgetDetailsPage} />
     <PrivateRoute path='/gadgets/edit/:id' component={EditGadgetPage} />
     <PrivateRoute path='/gadgets/delete/:id' component={DeleteGadgetPage} />

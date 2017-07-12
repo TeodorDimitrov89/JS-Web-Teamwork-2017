@@ -1,5 +1,6 @@
 import React from 'react'
 import Input from '../common/forms/Input'
+import TextArea from '../common/forms/TextArea'
 const DeleteGadgetForm = (props) => (
   <div>
     <form className='container'>
@@ -10,7 +11,7 @@ const DeleteGadgetForm = (props) => (
         placeholder='Title'
         value={props.gadget.title} />
       <br />
-      <Input
+      <TextArea
         disabled={props.disabled}
         name='description'
         placeholder='Description'

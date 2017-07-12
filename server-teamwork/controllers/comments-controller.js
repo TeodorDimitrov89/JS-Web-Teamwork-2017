@@ -50,7 +50,7 @@ module.exports = {
           gadget.save().then(() => {
             res.status(200).json({
               success: true,
-              message: 'Gadget added successfully.',
+              message: 'Comment added successfully.',
               comment
             })
           }).catch((err) => {
@@ -81,6 +81,7 @@ module.exports = {
       }
       res.status(200).json({
         success: true,
+        message: 'Comment fetched',
         comment
       })
     })

@@ -53,7 +53,7 @@ class CreateCommentPage extends React.Component {
   }
   validateComment () {
     const comment = this.state.comment
-    return ValidateHelpers.validateCommentCreate.bind(this)(comment)
+    return ValidateHelpers.validateCreateEditComment.bind(this)(comment)
   }
   render () {
     let gadgetTitle = this.props.match.params.title.replace(/[-]+/g, ' ')

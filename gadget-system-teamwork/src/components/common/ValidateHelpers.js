@@ -66,7 +66,7 @@ class ValidateHelpers {
       isFormValid = false
       error = 'Quantity must be between 0 and 100pcs.'
     }
-    if (!gadget || typeof Number(gadget.price) !== 'number' || !gadget.price > 1) {
+    if (!gadget || typeof Number(gadget.price) !== 'number' || Number(gadget.price) < 1) {
       isFormValid = false
       error = 'Price must be greater than 1.'
     }
@@ -76,7 +76,7 @@ class ValidateHelpers {
     }
     return isFormValid
   }
-  static validateCommentCreate (comment) {
+  static validateCreateEditComment (comment) {
     let error = ''
     let isFormValid = true
     if (!comment ||

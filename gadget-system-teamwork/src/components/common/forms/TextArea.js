@@ -6,6 +6,7 @@ const TextArea = (props) => (
     <textarea
       rows='4' cols='50'
       className='form-control'
+      disabled={props.disabled}
       type={props.type}
       id={props.name}
       name={props.name}
