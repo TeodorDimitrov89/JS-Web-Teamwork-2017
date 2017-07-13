@@ -7,7 +7,7 @@ export default class AdminPanelForm extends Component {
       <div className='container'>
         <div className='table-responsive'>
           <h1>Users</h1>
-          <table className='table table-bordered'>
+          <table className='table table-bordered admin'>
             <thead>
               <tr>
                 <th>User email</th>
