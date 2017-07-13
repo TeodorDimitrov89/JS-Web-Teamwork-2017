@@ -40,10 +40,10 @@ export default class UserProfilePage extends Component {
   }
 
   render () {
-    let boughtData = ''
-    let renderRows = ''
-    if (Object.keys(this.state.boughtData).length !== 0) {
-      boughtData = this.state.boughtData.qtyBoughtGadgets
+    let boughtData = this.state.boughtData.qtyBoughtGadgets
+    let renderRows = <tr style={{color: 'red', fontSize: '1.4em'}}><td><strong>No articles bought by the user</strong></td></tr>
+    if (Object.keys(this.state.boughtData).length !== 0 && this.boughtData !== undefined) {
+      console.log(this.state.boughtData.qtyBoughtGadgets)
       renderRows = Object.keys(boughtData).map((key, index) => {
         let gadgetName = key
         let pcs = boughtData[key][0]
@@ -60,6 +60,7 @@ export default class UserProfilePage extends Component {
         )
       })
     }
+
     return (
       <UserProfileForm
         data={renderRows} />
