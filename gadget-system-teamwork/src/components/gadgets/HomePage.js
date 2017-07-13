@@ -39,7 +39,6 @@ class HomePage extends React.Component {
           <p>{gadget.description}</p>
           <img src={`${gadget.image}`} alt={`${gadget.title}`} />
           <p><strong>Quantity on stock: </strong>{gadget.quantityOnStock}</p>
-          <p><strong>Single price:</strong> {gadget.price} USD</p>
           {(Auth.isUserAuthenticated() && Auth.isUserAdmin()) ? (
             <div>
               <Link to={`/gadgets/edit/${gadget._id}`}>Edit</Link>

@@ -55,12 +55,6 @@ img {
   display: inline-block;
   margin-left: 5px;
 }
-.list-comments a {
-  display: inline-block;
-  margin-left: 5px;
-  width: 10%!important;
-  vertical-align: bottom;
-}
 
 .homeGadgets img {
   width: 350px;
@@ -87,9 +81,4 @@ img {
 }
 .flex {
   display: flex;
-}
-
-table.table-bordered.admin {
-  background: white!important;
-  border-radius: 10px;
 }
